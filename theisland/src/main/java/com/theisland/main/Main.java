@@ -1,4 +1,4 @@
-package com.theisland;
+package com.theisland.main;
 
 public class Main {
     public static void main(String[] args) {
