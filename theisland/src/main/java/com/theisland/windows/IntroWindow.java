@@ -20,7 +20,7 @@ public class IntroWindow {
     public void setView(JFrame frame) {
         
         // Reset frame to make it empty
-        WindowsUtils.resetWindow(frame);
+        WindowUtils.resetWindow(frame);
 
 
         /**

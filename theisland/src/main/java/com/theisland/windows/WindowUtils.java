@@ -2,7 +2,7 @@ package com.theisland.windows;
 
 import javax.swing.JFrame;
 
-public class WindowsUtils {
+public class WindowUtils {
 
     /**
      * Remove everything from a frame
