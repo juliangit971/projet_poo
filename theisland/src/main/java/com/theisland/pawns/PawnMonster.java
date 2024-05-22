@@ -1,5 +1,6 @@
 package com.theisland.pawns;
 
-public class PawnMonster extends Pawn {
+abstract public class PawnMonster extends Pawn {
 
+    abstract public void attack();
 }
