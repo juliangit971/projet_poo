@@ -3,24 +3,28 @@ package com.theisland.windows;
 import javax.swing.JFrame;
 
 import com.theisland.enums.WindowNames;
-import com.theisland.main.EnvironmentVariables;
+// import com.theisland.main.EnvironmentVariables;
 import com.theisland.misc.EnhancedLog;
 
-public class IntroWindow {
+public class TestWindow {
 
 
-    private EnvironmentVariables env;
+    // private EnvironmentVariables env;
 
 
-	public IntroWindow(EnvironmentVariables env) {
-		this.env = env;
-	}
+	// public TestWindow(EnvironmentVariables env) {
+	// 	this.env = env;
+	// }
 
 
     public void setView(JFrame frame) {
         
         // Reset frame to make it empty
         WindowUtils.resetWindow(frame);
+
+        // Frame Settings
+        frame.setTitle(WindowNames.MAIN_MENU.getWindowName());
+        frame.setSize(830, 850);
 
 
         /**
@@ -33,6 +37,6 @@ public class IntroWindow {
 
         
         // Log
-        EnhancedLog.eventLogger("Window \"" + WindowNames.INTRO.getWindowName() + "\" set !" , "INFO");
+        EnhancedLog.eventLogger("Window \"" + WindowNames.DEFAULT.getWindowName() + "\" set !" , "INFO");
     }
 }

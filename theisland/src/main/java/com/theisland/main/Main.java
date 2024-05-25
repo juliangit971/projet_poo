@@ -40,8 +40,13 @@ public class Main {
                 if(env.getRefreshWindow() == true) {
     
                     switch (env.getCurrentWindow()) {
-                        case INTRO:
-                            windowLibrary.showIntroWindow(programWindow);
+                        case MAIN_MENU:
+                            windowLibrary.showMainMenuWindow(programWindow);
+                            env.setRefreshWindow(false);
+                            break;
+
+                        case GAME:
+                            windowLibrary.showMainMenuWindow(programWindow);
                             env.setRefreshWindow(false);
                             break;
                         

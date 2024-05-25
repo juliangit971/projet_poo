@@ -7,10 +7,10 @@ public enum WindowNames {
     DEFAULT("THE ISLAND"),
 
     // Intro Window
-    INTRO("THE ISLAND - WELCOME"),
+    MAIN_MENU(DEFAULT.getWindowName()),
     
     // Game Windows
-    PLATE("NETFLIP - GAME");
+    GAME("NETFLIP - GAME");
 
 
     

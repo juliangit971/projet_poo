@@ -1,14 +1,20 @@
 package com.theisland.enums;
 
+import java.awt.Image;
 import java.net.URL;
+
+import com.theisland.utils.FileManager;
 
 public enum ImagePaths {
 
     // System Window Layout
-    WINDOW_ICON("gui/the_island_icon.png"),
+    WINDOW_ICON("gui/favico.png"),
 
     // Main Layout pictures
-    TEST("gui/test.png");
+    TEST("gui/test.png"),
+    GAME_SPLASH("gui/splash.png"),
+
+    GAME_BOARD("gui/map.jpg");
 
 
     private String imagePath;
@@ -17,7 +23,17 @@ public enum ImagePaths {
         this.imagePath = imagePath;
     }
     
-    public URL getIconPath() {
+    public URL getImagePath() {
         return getClass().getClassLoader().getResource(imagePath);
+    }
+
+
+    /**
+     * Return an {@ Image} Object in order to use it directly as a background image for a JPanel
+     * @return an {@ Image} Object
+     */
+    public Image getImageForPanelBGImage() {
+        FileManager fm = new FileManager();
+        return fm.getImageFromLocalRes(getImagePath()); 
     }
 }

@@ -13,7 +13,7 @@ public class EnvironmentVariables {
 
     public void initVariables() {
         this.resetWindowPosition = true;
-        this.currentWindow = WindowNames.INTRO;
+        this.currentWindow = WindowNames.MAIN_MENU;
         this.refreshWindow = true;
     }
 

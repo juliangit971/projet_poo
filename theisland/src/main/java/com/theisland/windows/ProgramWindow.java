@@ -25,7 +25,7 @@ public class ProgramWindow {
         frame.setResizable(false);
 
         // Set Window Icon
-        Image programIcon = Toolkit.getDefaultToolkit().getImage(ImagePaths.WINDOW_ICON.getIconPath());
+        Image programIcon = Toolkit.getDefaultToolkit().getImage(ImagePaths.WINDOW_ICON.getImagePath());
 		frame.setIconImage(programIcon);
 
         frame.setVisible(true);
