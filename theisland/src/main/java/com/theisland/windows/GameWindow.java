@@ -1,6 +1,8 @@
 package com.theisland.windows;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -15,28 +17,38 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.theisland.enums.ImagePaths;
+import com.theisland.enums.WindowNames;
+import com.theisland.main.EnvironmentVariables;
+import com.theisland.misc.EnhancedLog;
 import com.theisland.utils.JButtonHexagon;
 
-import java.awt.Dimension;
-import java.awt.Cursor;
+public class GameWindow {
 
-public class GameTestWindow {
-	
 
-	/**
-	 * Create the frame.
-	 */
-	public GameTestWindow() {
-		
-		
-		JFrame frame = new JFrame();
-		
-		frame.setSize(948, 774);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		
-		
-		// Main Panel
+    private EnvironmentVariables env;
+
+
+	public GameWindow(EnvironmentVariables env) {
+		this.env = env;
+	}
+
+
+    public void setView(JFrame frame) {
+        
+        // Reset frame to make it empty
+        WindowUtils.resetWindow(frame);
+
+        // Frame Settings
+        frame.setTitle(WindowNames.GAME.getWindowName());
+        frame.setSize(948, 774);
+
+        if(env.getResetWindowPosition()) {
+			frame.setLocationRelativeTo(null);
+			env.setResetWindowPosition(false);
+		}
+
+
+        // Main Panel
 		JPanel mainPanel = new JPanel();
 		frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 		mainPanel.setLayout(new BorderLayout(0, 0));
@@ -102,27 +114,60 @@ public class GameTestWindow {
 		mainPanel.add(mapPanel, BorderLayout.CENTER);
 
 
-		// Hexagonal Buttons
-		JButtonHexagon hexButton = new JButtonHexagon();
-		hexButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		hexButton.setBounds(165, 10, 60, 66);
-        hexButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Hexagonal Button Pressed!");
-            }
-        });
-		
-		mapPanel.add(hexButton);
-		
-		JButtonHexagon hexButton_1 = new JButtonHexagon();
-		hexButton_1.setBounds(218, 10, 60, 66);
-		mapPanel.add(hexButton_1);
-		
-		JButtonHexagon hexButton_2 = new JButtonHexagon();
-		hexButton_2.setBounds(87, 55, 60, 66);
-		mapPanel.add(hexButton_2);
 
-		
-	}
+        // [#] Hexagonal JButtons
+
+        Integer buttonToAdd = 0;
+        Integer posX = 0;
+        Integer posY = 15;
+        Integer separationX = 53;
+        Integer separationY = 45;
+        Integer numberOfButton = 0;
+
+        // Row 1
+		for(int i = 0; i < 13; i++){
+
+            if(i == 0 || i == 12) {
+                buttonToAdd = 7;
+                posX = 169;
+            } else if(i == 5 || i == 7) {
+                buttonToAdd = 12;
+                posX = 34;
+            } else if(i%2 == 1) {
+                buttonToAdd =  10;
+                posX = 87;
+            } else if(i%2 == 0) {
+                buttonToAdd = 11;
+                posX = 60;
+            } 
+
+            for(int j = 0; j < buttonToAdd; j++) {
+                JButtonHexagon hexButton = new JButtonHexagon();
+                hexButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                hexButton.setBounds(posX + (separationX * j), posY, 60, 66);
+
+                Integer nob = numberOfButton;
+
+                hexButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(null, "Hexagonal Button " + Integer.toString(nob) + " Pressed!");
+                    }
+                });
+
+                mapPanel.add(hexButton);
+                numberOfButton++;
+            }
+
+            posY += separationY;
+		}
+
+
+        // Revalidate to refresh the updated page
+		frame.revalidate();
+
+        
+        // Log
+        EnhancedLog.eventLogger("Window \"" + WindowNames.DEFAULT.getWindowName() + "\" set !" , "INFO");
+    }
 }

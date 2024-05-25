@@ -3,14 +3,14 @@ package com.theisland.enums;
 public enum WindowNames {
 
 
-    // Default Window name
+    // Default Window
     DEFAULT("THE ISLAND"),
 
-    // Intro Window
+    // Main Menu Window
     MAIN_MENU(DEFAULT.getWindowName()),
     
     // Game Windows
-    GAME("NETFLIP - GAME");
+    GAME("THE ISLAND - GAME MAP");
 
 
     

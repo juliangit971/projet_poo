@@ -14,8 +14,8 @@ public enum ImagePaths {
     TEST("gui/test.png"),
     GAME_SPLASH("gui/splash.png"),
 
-    GAME_BOARD("gui/map.jpg");
-
+    // Game Elements
+    GAME_MAP("gui/map_rectified.png");
 
     private String imagePath;
 

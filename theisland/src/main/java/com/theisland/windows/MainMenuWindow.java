@@ -58,6 +58,7 @@ public class MainMenuWindow {
 				// Update environmet variables
 				env.setCurrentWindow(WindowNames.GAME);
 				env.setRefreshWindow(true);
+				env.setResetWindowPosition(true);
 			}
         });
 

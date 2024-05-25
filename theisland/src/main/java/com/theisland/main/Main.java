@@ -46,7 +46,7 @@ public class Main {
                             break;
 
                         case GAME:
-                            windowLibrary.showMainMenuWindow(programWindow);
+                            windowLibrary.showGameWindow(programWindow);
                             env.setRefreshWindow(false);
                             break;
                         

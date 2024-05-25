@@ -9,13 +9,13 @@ import java.awt.geom.Path2D;
 
 import javax.swing.JButton;
 
-public class HexagonalButton extends JButton {
+public class JButtonHexagon extends JButton {
 
     private static final int SIDES = 6;
 
 
 
-    public HexagonalButton() {
+    public JButtonHexagon() {
 
         setPreferredSize(new Dimension(100, 100));
         setContentAreaFilled(false);
@@ -58,8 +58,8 @@ public class HexagonalButton extends JButton {
         double radius = Math.min(centerX, centerY);
         for (int i = 0; i < SIDES; i++) {
             double angle = Math.toRadians(60 * i);
-            double x = centerX + radius * Math.cos(angle);
-            double y = centerY + radius * Math.sin(angle);
+            double y = centerX + radius * Math.cos(angle);
+            double x = centerY + radius * Math.sin(angle);
             if (i == 0) {
                 hexagon.moveTo(x, y);
             } else {
