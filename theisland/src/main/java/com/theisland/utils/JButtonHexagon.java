@@ -1,9 +1,9 @@
 package com.theisland.utils;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Shape;
 import java.awt.geom.Path2D;
 
@@ -16,6 +16,7 @@ public class JButtonHexagon extends JButton {
 
     private static final int SIDES = 6;
     private BoardSlot boardSlot;
+    private Image backgroundImage = null;
 
 
     public JButtonHexagon() {
@@ -30,15 +31,11 @@ public class JButtonHexagon extends JButton {
 
     @Override
     protected void paintComponent(Graphics g) {
-        if (getModel().isArmed()) {
-            g.setColor(Color.LIGHT_GRAY);
-        } else {
-            g.setColor(getBackground());
+        
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 8, 0, null);
         }
-        /*
-        Graphics2D g2 = (Graphics2D) g;
-        g2.fill(createHexagon());
-        super.paintComponent(g);*/
     }
 
 
@@ -89,5 +86,9 @@ public class JButtonHexagon extends JButton {
     }
     public void setBoardSlot(BoardSlot boardSlot) {
         this.boardSlot = boardSlot;
+    }
+
+    public void setBackgroundImage(Image backgroundImage) {
+        this.backgroundImage = backgroundImage;
     }
 }

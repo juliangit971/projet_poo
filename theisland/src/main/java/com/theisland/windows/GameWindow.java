@@ -5,7 +5,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,7 +18,6 @@ import javax.swing.border.EmptyBorder;
 import com.theisland.enums.ImagePaths;
 import com.theisland.enums.WindowNames;
 import com.theisland.gameelements.BoardSlotProperties;
-import com.theisland.gameelements.GameBoard;
 import com.theisland.main.EnvironmentVariables;
 import com.theisland.misc.EnhancedLog;
 
@@ -73,6 +75,21 @@ public class GameWindow {
 		JLabel player1Label = new JLabel("Joueur 1");
 		player1Label.setFont(new Font("Dialog", Font.BOLD, 21));
 		westPanel.add(player1Label);
+
+		// Shuffle Tiles Button
+		JButton shuffleTilesButton = new JButton("Shuffle Tiles");
+
+		shuffleTilesButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Update environmet variables
+				env.getGameVariables().getGameBoard().initTiles();
+				env.setRefreshWindow(true);
+			}
+        });
+
+		westPanel.add(shuffleTilesButton);
 		
 
 		// South Panel
@@ -115,9 +132,6 @@ public class GameWindow {
         // [#] Hexagonal JButtons
 
 		Integer buttonToAdd = 0;
-
-		GameBoard gb = new GameBoard();
-		gb.init();
 		
 		for(int i = 0; i < BoardSlotProperties.ROW_AMOUNT; i++){
 
@@ -137,7 +151,7 @@ public class GameWindow {
 				 * "get(i)" : Get the row "i" containing an amount of slots
 				 * "get(j)" : Get the Slot at position [i, j] in the map
 				 */
-				mapPanel.add( gb.getBoardSlots().get(i).get(j).getHexagonButton() ) ;
+				mapPanel.add( env.getGameVariables().getGameBoard().getBoardSlots().get(i).get(j).getHexagonButton() ) ;
             }
 		}
 

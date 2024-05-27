@@ -15,6 +15,10 @@ public class GameVariables {
     private MonsterDice monsterDice;
 
 
+    public GameVariables() {
+        this.gameBoard = new GameBoard();
+    }
+
     // Getters & Setters
 
 

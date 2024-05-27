@@ -20,6 +20,11 @@ public class Main {
         EnvironmentVariables env = new EnvironmentVariables();
         env.initVariables();
 
+        // Initialize game Variables
+        env.getGameVariables().getGameBoard().init();
+        env.getGameVariables().getGameBoard().initTiles();
+
+
 
         // Initialize main Frame
         programWindow = new ProgramWindow();

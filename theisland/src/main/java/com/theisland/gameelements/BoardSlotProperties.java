@@ -49,6 +49,8 @@ public class BoardSlotProperties {
      * Rows start from 0
      */
     final static public Position ROWS_WITH_TILES = new Position(3, 9);
+    // ROWS_WITH_TILES_AMOUNT = 7
+    final static public Integer ROWS_WITH_TILES_AMOUNT = ROWS_WITH_TILES.getY() - ROWS_WITH_TILES.getX() + 1;
 
     /**
      * List of columns able to have a tile on it
@@ -66,9 +68,22 @@ public class BoardSlotProperties {
         new Position(3, 6)
     );
 
+    /**
+     * Amount of tiles per rows
+     */
+    final static public List<Integer> COLUMNS_WITH_TILES_AMOUNT = Arrays.asList(
+        COLUMNS_WITH_TILES.get(0).getY() - COLUMNS_WITH_TILES.get(0).getY() + 1,  // = 4
+        COLUMNS_WITH_TILES.get(1).getY() - COLUMNS_WITH_TILES.get(1).getY() + 1,  // = 5
+        COLUMNS_WITH_TILES.get(2).getY() - COLUMNS_WITH_TILES.get(2).getY() + 1,  // = 8
+        COLUMNS_WITH_TILES.get(3).getY() - COLUMNS_WITH_TILES.get(3).getY() + 1,  // = 7  /!\ Il y en a 6 ici car la case du milieu contient un {@code PawnSnake}
+        COLUMNS_WITH_TILES.get(4).getY() - COLUMNS_WITH_TILES.get(4).getY() + 1,  // = 8
+        COLUMNS_WITH_TILES.get(5).getY() - COLUMNS_WITH_TILES.get(5).getY() + 1,  // = 5
+        COLUMNS_WITH_TILES.get(6).getY() - COLUMNS_WITH_TILES.get(6).getY() + 1   // = 4
+    );
+
 
     /**
      * Represent the {@code BoardSlot} in the middle of the island where a {@code PawnSnake} should be
      */
-    final static public Position BOARD_SLOT_WITHOUT_TILE_EXCEPTION = new Position(6, 5);
+    final static public Position SLOT_WITHOUT_TILE_EXCEPTION = new Position(6, 5);
 }

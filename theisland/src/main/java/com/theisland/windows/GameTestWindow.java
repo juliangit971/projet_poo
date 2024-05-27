@@ -19,6 +19,7 @@ import com.theisland.utils.JButtonHexagon;
 
 import java.awt.Dimension;
 import java.awt.Cursor;
+import javax.swing.JButton;
 
 public class GameTestWindow {
 	
@@ -64,6 +65,9 @@ public class GameTestWindow {
 		JLabel player1Label = new JLabel("Joueur 1");
 		player1Label.setFont(new Font("Dialog", Font.BOLD, 21));
 		westPanel.add(player1Label);
+		
+		JButton shuffleTilesButton = new JButton("Shuffle Tiles");
+		westPanel.add(shuffleTilesButton);
 		
 
 		// South Panel

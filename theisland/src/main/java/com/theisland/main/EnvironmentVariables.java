@@ -8,6 +8,7 @@ public class EnvironmentVariables {
     private Boolean resetWindowPosition;
     private WindowNames currentWindow;
     private Boolean refreshWindow;
+    private GameVariables gameVariables;
 
 
 
@@ -15,6 +16,7 @@ public class EnvironmentVariables {
         this.resetWindowPosition = true;
         this.currentWindow = WindowNames.MAIN_MENU;
         this.refreshWindow = true;
+        this.gameVariables = new GameVariables();
     }
 
 
@@ -40,5 +42,12 @@ public class EnvironmentVariables {
     }
     public void setRefreshWindow(Boolean refreshWindow) {
         this.refreshWindow = refreshWindow;
+    }
+
+    public GameVariables getGameVariables() {
+        return gameVariables;
+    }
+    public void setGameVariables(GameVariables gameVariables) {
+        this.gameVariables = gameVariables;
     }
 }

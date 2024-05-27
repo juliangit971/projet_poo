@@ -1,6 +1,7 @@
 package com.theisland.gameelements;
 
 import java.awt.Cursor;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -8,6 +9,12 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import com.theisland.enums.ImagePaths;
+import com.theisland.tiles.TileBeach;
+import com.theisland.tiles.TileForest;
+import com.theisland.tiles.TileMountain;
+import com.theisland.tiles.TileProperties;
+import com.theisland.utils.GeneralUtils;
 import com.theisland.utils.JButtonHexagon;
 import com.theisland.utils.Position;
 
@@ -75,6 +82,105 @@ public class GameBoard {
 
             // Increment Y postion
             posY += BoardSlotProperties.SEPARATION_Y;
+		}
+    }
+
+
+    /**
+     * Initialize every tiles on the correct {@code BoardSlot}
+     */
+    public void initTiles() {
+
+        int k = 0;
+
+        int beachTiles = TileProperties.AMOUNT_TILE_BEACH;
+        Image beachTileImage = ImagePaths.TILE_BEACH.getImageForPanelBGImage();
+
+        int forestTiles = TileProperties.AMOUNT_TILE_FOREST;
+        Image forestTileImage = ImagePaths.TILE_FOREST.getImageForPanelBGImage();
+
+        int mountainTiles = TileProperties.AMOUNT_TILE_MOUNTAIN;
+        Image mountainTileImage = ImagePaths.TILE_MOUNTAIN.getImageForPanelBGImage();
+          
+
+        for(int i = BoardSlotProperties.ROWS_WITH_TILES.getX(); i <= BoardSlotProperties.ROWS_WITH_TILES.getY(); i++) {
+
+            for(int j = BoardSlotProperties.COLUMNS_WITH_TILES.get(k).getX(); j <= BoardSlotProperties.COLUMNS_WITH_TILES.get(k).getY(); j++) {
+                
+                Integer tileToUse = null; // 1 = Beach ; 2 = Forest : 3 = Mountain
+                boolean isTileValid = false;
+
+                // If the Slot isn't the slot where the {@code PawnSnake} is supposed to be
+                if (i != BoardSlotProperties.SLOT_WITHOUT_TILE_EXCEPTION.getX() || j != BoardSlotProperties.SLOT_WITHOUT_TILE_EXCEPTION.getY()) {
+
+                    // Select a tile Randomly
+                    while (!isTileValid) {
+
+    
+                        tileToUse = GeneralUtils.getRandomNumber(1, 4);
+    
+                        switch (tileToUse) {
+    
+                            case 1:
+                                if(beachTiles - 1 < 0) {
+                                    isTileValid = false;
+                                } else {
+                                    isTileValid = true;
+                                    beachTiles--;
+                                }
+    
+                                break;
+                            
+                            case 2:
+                                if(forestTiles - 1 < 0) {
+                                    isTileValid = false;
+                                } else {
+                                    isTileValid = true;
+                                    forestTiles--;
+                                }
+    
+                                break;
+                            
+                            case 3:
+                                if(mountainTiles - 1 < 0) {
+                                    isTileValid = false;
+                                } else {
+                                    isTileValid = true;
+                                    mountainTiles--;
+                                }
+    
+                                break;
+                            
+                            default:
+                                isTileValid = false;
+                                break;
+                        }
+                    }
+
+                    // Set the right tile image
+                    JButtonHexagon hexButton = boardSlots.get(i).get(j).getHexagonButton();
+
+                    switch (tileToUse) {
+                        case 1:
+                            hexButton.setBackgroundImage(beachTileImage);
+                            boardSlots.get(i).get(j).setTile(new TileBeach());
+                            break;
+                        
+                        case 2:
+                            hexButton.setBackgroundImage(forestTileImage);
+                            boardSlots.get(i).get(j).setTile(new TileForest());
+                            break;
+                        
+                        case 3:
+                            hexButton.setBackgroundImage(mountainTileImage);
+                            boardSlots.get(i).get(j).setTile(new TileMountain());
+                            break;
+                    }                      
+                }
+
+            }
+
+            k++;
 		}
     }
 
