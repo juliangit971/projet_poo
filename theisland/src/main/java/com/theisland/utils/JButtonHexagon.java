@@ -9,10 +9,13 @@ import java.awt.geom.Path2D;
 
 import javax.swing.JButton;
 
+import com.theisland.gameelements.BoardSlot;
+
 public class JButtonHexagon extends JButton {
 
-    private static final int SIDES = 6;
 
+    private static final int SIDES = 6;
+    private BoardSlot boardSlot;
 
 
     public JButtonHexagon() {
@@ -76,4 +79,15 @@ public class JButtonHexagon extends JButton {
         return createHexagon().contains(x, y);
     }
 
+
+
+
+    // Getters & Setters
+
+    public BoardSlot getBoardSlot() {
+        return boardSlot;
+    }
+    public void setBoardSlot(BoardSlot boardSlot) {
+        this.boardSlot = boardSlot;
+    }
 }

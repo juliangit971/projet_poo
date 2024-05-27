@@ -11,7 +11,7 @@ public class TileProperties {
     /**
      * List of possible {@code TileActions} that can be behind a {@code TileBeach}
      */
-    final private List<TileActions> TILE_BEACH_ACTION = Arrays.asList(    // Fixed List size because this list shouldn't change size
+    final static public List<TileActions> TILE_BEACH_ACTION = Arrays.asList(    // Fixed List size because this list shouldn't change size
         TileActions.GREEN_PLACE_WHALE,
         TileActions.GREEN_PLACE_SHARK,
         TileActions.GREEN_PLACE_BOAT,
@@ -29,7 +29,7 @@ public class TileProperties {
     /**
      * List of possible {@code TileActions} that can be behind a {@code TileForest}
      */
-    final private List<TileActions> TILE_FOREST_ACTIONS = Arrays.asList(    // Fixed List size because this list shouldn't change size
+    final static public List<TileActions> TILE_FOREST_ACTIONS = Arrays.asList(    // Fixed List size because this list shouldn't change size
         TileActions.GREEN_PLACE_WHALE,
         TileActions.GREEN_PLACE_SHARK,
         TileActions.GREEN_PLACE_BOAT,
@@ -48,7 +48,7 @@ public class TileProperties {
     /**
      * List of possible {@code TileActions} that can be behind a {@code TileMountain}
      */
-    final private List<TileActions> TILE_MOUNTAIN_ACTIONS = Arrays.asList(    // Fixed List size because this list shouldn't change size
+    final static public List<TileActions> TILE_MOUNTAIN_ACTIONS = Arrays.asList(    // Fixed List size because this list shouldn't change size
         TileActions.GREEN_PLACE_SHARK,
         TileActions.GREEN_PLACE_WHIRLPOOL,
         TileActions.GREEN_PLACE_VOLCANO,
@@ -62,37 +62,9 @@ public class TileProperties {
      * Number of tiles that can be in game
      */
 
-    final Integer AMOUNT_TILE_BEACH = 16;
-    final Integer AMOUNT_TILE_FOREST = 16;
-    final Integer AMOUNT_TILE_MOUNTAIN = 8;
+    final static public Integer AMOUNT_TILE_BEACH = 16;
+    final static public Integer AMOUNT_TILE_FOREST = 16;
+    final static public Integer AMOUNT_TILE_MOUNTAIN = 8;
     // Total Tiles = 40
-    final Integer AMOUNT_TILE_TOTAL = AMOUNT_TILE_BEACH + AMOUNT_TILE_FOREST + AMOUNT_TILE_MOUNTAIN;
-    
-
-
-    // Getters
-
-    public List<TileActions> getTileBeachActions() {
-        return TILE_BEACH_ACTION;
-    }
-    public List<TileActions> getTileForestActions() {
-        return TILE_FOREST_ACTIONS;
-    }
-    public List<TileActions> getTileMountainActions() {
-        return TILE_MOUNTAIN_ACTIONS;
-    }
-    
-
-    public Integer getAmountTileBeach() {
-        return AMOUNT_TILE_BEACH;
-    }
-    public Integer getAmountTileForest() {
-        return AMOUNT_TILE_FOREST;
-    }
-    public Integer getAmountTileMountain() {
-        return AMOUNT_TILE_MOUNTAIN;
-    }
-    public Integer getAmountTileTotal() {
-        return AMOUNT_TILE_TOTAL;
-    }
+    final static public Integer AMOUNT_TILE_TOTAL = AMOUNT_TILE_BEACH + AMOUNT_TILE_FOREST + AMOUNT_TILE_MOUNTAIN;
 }

@@ -1,26 +1,23 @@
 package com.theisland.windows;
 
 import java.awt.BorderLayout;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.theisland.enums.ImagePaths;
 import com.theisland.enums.WindowNames;
+import com.theisland.gameelements.BoardSlotProperties;
+import com.theisland.gameelements.GameBoard;
 import com.theisland.main.EnvironmentVariables;
 import com.theisland.misc.EnhancedLog;
-import com.theisland.utils.JButtonHexagon;
 
 public class GameWindow {
 
@@ -117,49 +114,31 @@ public class GameWindow {
 
         // [#] Hexagonal JButtons
 
-        Integer buttonToAdd = 0;
-        Integer posX = 0;
-        Integer posY = 15;
-        Integer separationX = 53;
-        Integer separationY = 45;
-        Integer numberOfButton = 0;
+		Integer buttonToAdd = 0;
 
-        // Row 1
-		for(int i = 0; i < 13; i++){
+		GameBoard gb = new GameBoard();
+		gb.init();
+		
+		for(int i = 0; i < BoardSlotProperties.ROW_AMOUNT; i++){
 
-            if(i == 0 || i == 12) {
-                buttonToAdd = 7;
-                posX = 169;
+			
+			if(i == 0 || i == 12) {
+                buttonToAdd = BoardSlotProperties.BUTTON_TO_ADD_ROWS_0_12;
             } else if(i == 5 || i == 7) {
-                buttonToAdd = 12;
-                posX = 34;
+                buttonToAdd = BoardSlotProperties.BUTTON_TO_ADD_ROWS_5_7;
             } else if(i%2 == 1) {
-                buttonToAdd =  10;
-                posX = 87;
+                buttonToAdd =  BoardSlotProperties.BUTTON_TO_ADD_ROWS_ODD;
             } else if(i%2 == 0) {
-                buttonToAdd = 11;
-                posX = 60;
+                buttonToAdd = BoardSlotProperties.BUTTON_TO_ADD_ROWS_EVEN;
             } 
 
             for(int j = 0; j < buttonToAdd; j++) {
-                JButtonHexagon hexButton = new JButtonHexagon();
-                hexButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                hexButton.setBounds(posX + (separationX * j), posY, 60, 66);
-
-                Integer nob = numberOfButton;
-
-                hexButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(null, "Hexagonal Button " + Integer.toString(nob) + " Pressed!");
-                    }
-                });
-
-                mapPanel.add(hexButton);
-                numberOfButton++;
+				/**
+				 * "get(i)" : Get the row "i" containing an amount of slots
+				 * "get(j)" : Get the Slot at position [i, j] in the map
+				 */
+				mapPanel.add( gb.getBoardSlots().get(i).get(j).getHexagonButton() ) ;
             }
-
-            posY += separationY;
 		}
 
 
