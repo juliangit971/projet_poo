@@ -2,6 +2,7 @@ package com.theisland.windows;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import com.theisland.enums.GameStatus;
 import com.theisland.enums.ImagePaths;
@@ -67,10 +69,16 @@ public class GameWindow {
 		mainPanel.add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(new BorderLayout(0, 0));
 		
-		// Player 4 Label
-		JLabel player4Label = new JLabel("Joueur 4");
-		player4Label.setFont(new Font("Dialog", Font.BOLD, 21));
-		northPanel.add(player4Label, BorderLayout.WEST);
+		// Player 2 Label
+		JLabel player2Label = new JLabel("Joueur 2");
+		player2Label.setForeground(Color.BLUE);
+		player2Label.setFont(new Font("Dialog", Font.BOLD, 21));
+
+		if(env.getGameVariables().getCurrentPlayerTurn().getID() == 2) {
+			player2Label.setBorder(new LineBorder(Color.RED, 2, true));
+		}
+
+		northPanel.add(player2Label, BorderLayout.WEST);
 		
 
 		// West Panel
@@ -81,22 +89,16 @@ public class GameWindow {
 		
 		// Player 1 Label
 		JLabel player1Label = new JLabel("Joueur 1");
+		player1Label.setForeground(Color.RED);
 		player1Label.setFont(new Font("Dialog", Font.BOLD, 21));
+
+		if(env.getGameVariables().getCurrentPlayerTurn().getID() == 1) {
+			player1Label.setBorder(new LineBorder(Color.RED, 2, true));
+		}
+
 		westPanel.add(player1Label);
-
-		// Shuffle Tiles Button
+		
 		JButton shuffleTilesButton = new JButton("Shuffle Tiles");
-
-		shuffleTilesButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// Update environmet variables
-				env.getGameVariables().getGameBoard().initTiles();
-				env.setRefreshWindow(true);
-			}
-        });
-
 		westPanel.add(shuffleTilesButton);
 		
 
@@ -106,11 +108,17 @@ public class GameWindow {
 		mainPanel.add(southPanel, BorderLayout.SOUTH);
 		southPanel.setLayout(new BorderLayout(0, 0));
 		
-		// Player 2 Label
-		JLabel player2Label = new JLabel("Joueur 2");
-		player2Label.setHorizontalAlignment(SwingConstants.TRAILING);
-		player2Label.setFont(new Font("Dialog", Font.BOLD, 21));
-		southPanel.add(player2Label, BorderLayout.WEST);
+		// Player 4 Label
+		JLabel player4Label = new JLabel("Joueur 4");
+		player4Label.setForeground(new Color(0, 128, 0));
+		player4Label.setHorizontalAlignment(SwingConstants.TRAILING);
+		player4Label.setFont(new Font("Dialog", Font.BOLD, 21));
+
+		if(env.getGameVariables().getCurrentPlayerTurn().getID() == 4) {
+			player4Label.setBorder(new LineBorder(Color.RED, 2, true));
+		}
+
+		southPanel.add(player4Label, BorderLayout.WEST);
 		
 
 		// East Panel
@@ -121,7 +129,13 @@ public class GameWindow {
 		
 		// Player 3 Label
 		JLabel player3Label = new JLabel("Joueur 3");
+		player3Label.setForeground(Color.ORANGE);
 		player3Label.setFont(new Font("Arial", Font.BOLD, 21));
+
+		if(env.getGameVariables().getCurrentPlayerTurn().getID() == 3) {
+			player3Label.setBorder(new LineBorder(Color.RED, 2, true));
+		}
+
 		eastPanel.add(player3Label);
 		
 

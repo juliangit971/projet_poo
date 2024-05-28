@@ -106,27 +106,6 @@ public class GameTestWindow {
 		mainPanel.add(mapPanel, BorderLayout.CENTER);
 
 
-		// Hexagonal Buttons
-		JButtonHexagon hexButton = new JButtonHexagon();
-		hexButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		hexButton.setBounds(165, 10, 60, 66);
-        hexButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Hexagonal Button Pressed!");
-            }
-        });
-		
-		mapPanel.add(hexButton);
-		
-		JButtonHexagon hexButton_1 = new JButtonHexagon();
-		hexButton_1.setBounds(218, 10, 60, 66);
-		mapPanel.add(hexButton_1);
-		
-		JButtonHexagon hexButton_2 = new JButtonHexagon();
-		hexButton_2.setBounds(87, 55, 60, 66);
-		mapPanel.add(hexButton_2);
-
 		
 	}
 }
