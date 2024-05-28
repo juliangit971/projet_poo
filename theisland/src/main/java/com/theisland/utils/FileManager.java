@@ -72,7 +72,7 @@ public class FileManager {
         }
         
         if (file.exists()) {
-            EnhancedLog.eventLogger("Le fichier \"" + file.getName() + "\" existe !", "INFO");
+            // EnhancedLog.eventLogger("Le fichier \"" + file.getName() + "\" existe !", "INFO");
             return file;
         }
         
@@ -253,7 +253,7 @@ public class FileManager {
         }
 
         try {
-            EnhancedLog.eventLogger("L'image \"" + file.getName() + "\" existe !", "INFO");
+            // EnhancedLog.eventLogger("L'image \"" + file.getName() + "\" existe !", "INFO");
             return ImageIO.read(file);
 
         } catch (IOException ex) {

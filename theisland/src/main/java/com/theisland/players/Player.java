@@ -16,6 +16,7 @@ public class Player {
 
     private Integer ID;
     private PawnExplorerColors color;
+    private List<PawnExplorer> explorerToPlace;
     private List<PawnExplorer> ownedExplorers;
     private List<PawnExplorer> savedExplorers;
 	private List<Tile> ownedTiles;
@@ -23,6 +24,7 @@ public class Player {
 
     
     public Player() {
+        this.explorerToPlace = new ArrayList<>();
         this.ownedExplorers = new ArrayList<>();
         this.savedExplorers = new ArrayList<>();
         this.ownedBoat = new ArrayList<>();
@@ -75,10 +77,24 @@ public class Player {
             explorer.setColor(this.color);
             
             // Add PawnExplorer to list
-            this.ownedExplorers.add(explorer);
+            this.explorerToPlace.add(explorer);
         }   
     }
 
+    // Adders & Removers
+    public void addExplorerToPlace(PawnExplorer explorer) {
+        this.explorerToPlace.add(explorer);
+    }
+    public void removeExplorerToPlace(PawnExplorer explorerToRemove) {
+        this.explorerToPlace.remove(explorerToRemove);
+    }
+
+    public void addOwnedExplorers(PawnExplorer explorer) {
+        this.ownedExplorers.add(explorer);
+    }
+    public void removeOwnedExplorers(PawnExplorer explorerToRemove) {
+        this.ownedExplorers.remove(explorerToRemove);
+    }
 
     // Getters & Setters
 
@@ -95,6 +111,13 @@ public class Player {
     }
     public void setColor(PawnExplorerColors color) {
         this.color = color;
+    }
+
+    public List<PawnExplorer> getExplorerToPlace() {
+        return explorerToPlace;
+    }
+    public void setExplorerToPlace(List<PawnExplorer> explorerToPlace) {
+        this.explorerToPlace = explorerToPlace;
     }
 
     public List<PawnExplorer> getOwnedExplorers() {

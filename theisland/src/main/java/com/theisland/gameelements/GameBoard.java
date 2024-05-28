@@ -57,7 +57,7 @@ public class GameBoard {
                 boardSlot.setPosition(new Position(i, j));
 
                 JButtonHexagon hexButton = new JButtonHexagon();
-                hexButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                // hexButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 hexButton.setBounds(posX + (BoardSlotProperties.SEPARATION_X * j), posY, 60, 66);
                 
                 // DO NOT INITIALIZE BUTTON ACTION AT THE BEGINNING

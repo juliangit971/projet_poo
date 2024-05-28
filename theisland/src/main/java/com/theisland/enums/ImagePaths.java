@@ -22,7 +22,16 @@ public enum ImagePaths {
     // * Tiles 
     TILE_BEACH("gui/tile_beach.png"),
     TILE_FOREST("gui/tile_forest.png"),
-    TILE_MOUNTAIN("gui/tile_mountain.png");
+    TILE_MOUNTAIN("gui/tile_mountain.png"),
+
+    // * Pawns
+
+    // ** Pawn Explorer
+    PAWN_EXPLORER_BLUE("gui/pawn_explorer_blue.png"),
+    PAWN_EXPLORER_GREEN("gui/pawn_explorer_green.png"),
+    PAWN_EXPLORER_RED("gui/pawn_explorer_red.png"),
+    PAWN_EXPLORER_YELLOW("gui/pawn_explorer_yellow.png");
+
 
     private String imagePath;
 

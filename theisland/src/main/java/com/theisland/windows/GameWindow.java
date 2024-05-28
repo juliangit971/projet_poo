@@ -1,25 +1,33 @@
 package com.theisland.windows;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.theisland.enums.GameStatus;
 import com.theisland.enums.ImagePaths;
 import com.theisland.enums.WindowNames;
 import com.theisland.gameelements.BoardSlotProperties;
+import com.theisland.gameengine.GameEngine;
 import com.theisland.main.EnvironmentVariables;
 import com.theisland.misc.EnhancedLog;
+import com.theisland.pawns.Pawn;
+import com.theisland.pawns.PawnProperties;
+import com.theisland.utils.JButtonHexagon;
 
 public class GameWindow {
 
@@ -131,6 +139,7 @@ public class GameWindow {
 
         // [#] Hexagonal JButtons
 
+		// Show every buttons
 		Integer buttonToAdd = 0;
 		
 		for(int i = 0; i < BoardSlotProperties.ROW_AMOUNT; i++){
@@ -155,7 +164,73 @@ public class GameWindow {
             }
 		}
 
+
+
+
+		// Always reset "ActionListener" of every Hexagonal JButtons before adding new ones
 		env.getGameVariables().getGameBoard().resetHexButtonsActionListener();
+
+
+		// [#] Do some instructions depending on the current game status
+		switch (env.getGameVariables().getCurrentGameStatus()) {
+
+			// Explorers' Pawns Initialization
+			case INIT_PLACE_PLAYER_PAWNS:
+
+				// Place every clickable tiles where the player can place his pawn
+				int k = 0;
+				int nonClickableButtons = 0;
+				
+				// For every "Board Slots" where it is possible to add a Tile
+				for(int i = BoardSlotProperties.ROWS_WITH_TILES.getX(); i <= BoardSlotProperties.ROWS_WITH_TILES.getY(); i++) {
+					for(int j = BoardSlotProperties.COLUMNS_WITH_TILES.get(k).getX(); j <= BoardSlotProperties.COLUMNS_WITH_TILES.get(k).getY(); j++) {
+						
+						// If the Slot isn't the slot where the "PawnSnake" is supposed to be
+						if (i != BoardSlotProperties.SLOT_WITHOUT_TILE_EXCEPTION.getX() || j != BoardSlotProperties.SLOT_WITHOUT_TILE_EXCEPTION.getY()) {
+
+							List<Pawn> pawns = env.getGameVariables().getGameBoard().getBoardSlots().get(i).get(j).getPawns();
+
+							// If there are pawns on th slot, don't add anything to Hex Button
+							if(pawns.size() > 0) {
+								nonClickableButtons++;
+								continue;
+							} 
+
+							JButtonHexagon hexButton = env.getGameVariables().getGameBoard().getBoardSlots().get(i).get(j).getHexagonButton();
+								
+							hexButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+							hexButton.addActionListener(new ActionListener() {
+
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									GameEngine.init_placeExplorerPawn(hexButton.getBoardSlot(), env);
+									env.setRefreshWindow(true);
+								}
+							});
+						}
+
+					}
+
+					k++;
+				}
+
+				// If there are no more "BoardSlot" to place an Explorer, go to another action
+				if(nonClickableButtons == PawnProperties.AMOUNT_EXPLORERS_TOTAL) {
+
+					JOptionPane.showMessageDialog(null, "Vous avez fini de placer les explorateurs !");
+
+					env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
+					env.setRefreshWindow(true);
+				}
+
+				break;
+		
+			default:
+				break;
+		}
+
+
+
 
 
         // Revalidate to refresh the updated page

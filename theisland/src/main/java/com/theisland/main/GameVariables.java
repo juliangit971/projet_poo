@@ -52,6 +52,9 @@ public class GameVariables {
 
             this.players.add(player);
         }
+
+        // Set Player 1 as default player
+        this.currentPlayerTurn = this.players.get(0);
     }
 
 

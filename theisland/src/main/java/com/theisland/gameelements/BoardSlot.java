@@ -1,5 +1,6 @@
 package com.theisland.gameelements;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.theisland.pawns.Pawn;
@@ -21,6 +22,22 @@ public class BoardSlot {
      * To know in which row and line the Slot is
      */
     private Position position;
+
+
+    public BoardSlot() {
+        this.pawns = new ArrayList<>();
+    }
+
+
+    // Adders & Removers
+
+    public void addPawn(Pawn pawn) {
+        this.pawns.add(pawn);
+    }
+
+    public void removePawn(int index) {
+        this.pawns.remove(index);
+    }
 
 
     // Getters & Setters

@@ -9,7 +9,9 @@ import java.awt.geom.Path2D;
 
 import javax.swing.JButton;
 
+import com.theisland.enums.ImagePaths;
 import com.theisland.gameelements.BoardSlot;
+import com.theisland.pawns.PawnExplorer;
 
 public class JButtonHexagon extends JButton {
 
@@ -33,9 +35,45 @@ public class JButtonHexagon extends JButton {
     protected void paintComponent(Graphics g) {
         
         super.paintComponent(g);
+
+        // If a tile is defined for the button 
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 8, 0, null);
         }
+
+        // If there are pawns on the button
+        if(this.boardSlot.getPawns().size() > 0) {
+
+            // If there's only 1 pawn on the Slot
+            if(this.boardSlot.getPawns().size() == 1) {
+
+                if(this.boardSlot.getPawns().get(0) instanceof PawnExplorer) {
+
+                    PawnExplorer explorer = (PawnExplorer) this.boardSlot.getPawns().get(0);
+
+                    switch (explorer.getColor()) {
+                        case RED:
+                            g.drawImage(ImagePaths.PAWN_EXPLORER_RED.getImageForPanelBGImage(), 10, 7, null);
+                            break;
+
+                        case BLUE:
+                            g.drawImage(ImagePaths.PAWN_EXPLORER_BLUE.getImageForPanelBGImage(), 10, 7, null);
+                            break;
+
+                        case GREEN:
+                            g.drawImage(ImagePaths.PAWN_EXPLORER_GREEN.getImageForPanelBGImage(), 10, 7, null);
+                            break;
+
+                        case YELLOW:
+                            g.drawImage(ImagePaths.PAWN_EXPLORER_YELLOW.getImageForPanelBGImage(), 12, 7, null);
+                            break;
+                    }
+                }
+            
+            }
+
+        } 
+
     }
 
 

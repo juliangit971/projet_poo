@@ -7,7 +7,7 @@ public class EnvironmentVariables {
     // To know if it's necessary to center the window 
     private Boolean resetWindowPosition;
     private WindowNames currentWindow;
-    private Boolean refreshWindow;
+    private boolean refreshWindow;
     private GameVariables gameVariables;
 
 
@@ -40,7 +40,7 @@ public class EnvironmentVariables {
     public Boolean getRefreshWindow() {
         return refreshWindow;
     }
-    public void setRefreshWindow(Boolean refreshWindow) {
+    public void setRefreshWindow(boolean refreshWindow) {
         this.refreshWindow = refreshWindow;
     }
 
