@@ -6,13 +6,13 @@ public class PawnExplorer extends Pawn {
 
     /**
      * Know if the player is saved or not
-     * If {@code isAlive == null}, the {@code PawnExplorer} isn't initialized yet
+     * If ( {@code isAlive == false} or {@code isAlive == true} ) AND {@code status == null}, the {@code PawnExplorer} isn't initialized yet
      */
     private Boolean isAlive;
     /**
      * Value of an Explorer Pawn in game points
      */
-    private Integer amountTreasure;
+    private Integer treasureAmount;
     /**
      * is the player is a Swimmer or not
      */
@@ -29,11 +29,11 @@ public class PawnExplorer extends Pawn {
         this.isAlive = isAlive;
     }
 
-    public Integer getAmountTreasure() {
-        return amountTreasure;
+    public Integer getTreasureAmount() {
+        return treasureAmount;
     }
-    public void setAmountTreasure(Integer amountTreasure) {
-        this.amountTreasure = amountTreasure;
+    public void setTreasureAmount(Integer treasureAmount) {
+        this.treasureAmount = treasureAmount;
     }
     
     public Boolean getIsSwimmer() {

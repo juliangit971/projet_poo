@@ -5,14 +5,14 @@ import java.util.List;
 
 public class PawnProperties {
 
-    final Integer AMOUNT_EXPLORERS_PER_PLAYERS = 10;
-    final Integer AMOUNT_EXPLORERS_TOTAL = AMOUNT_EXPLORERS_PER_PLAYERS * 4;
+    final static public List<Integer> TREASURE_VALUES = Arrays.asList(1, 1, 1, 2, 2, 3, 3, 4, 5, 6);
 
-    final List<Integer> TREASURE_VALUES = Arrays.asList(1, 1, 1, 2, 2, 3, 3, 4, 5, 6);
+    final static public int AMOUNT_EXPLORERS_PER_PLAYERS = TREASURE_VALUES.size();
+    final static public int AMOUNT_EXPLORERS_TOTAL = AMOUNT_EXPLORERS_PER_PLAYERS * 4;
 
-    final Integer AMOUNT_SNAKES = 5;
-    final Integer AMOUNT_SHARKS = 6;
-    final Integer AMOUNT_WHALES = 5;
+    final static public int AMOUNT_SNAKES = 5;
+    final static public int AMOUNT_SHARKS = 6;
+    final static public int AMOUNT_WHALES = 5;
 
 
     // Getters

@@ -20,10 +20,11 @@ public class Main {
         EnvironmentVariables env = new EnvironmentVariables();
         env.initVariables();
 
-        // Initialize game Variables
+
+        // Initialize Game Variables
+        env.getGameVariables().initPlayers();
         env.getGameVariables().getGameBoard().init();
         env.getGameVariables().getGameBoard().initTiles();
-
 
 
         // Initialize main Frame
@@ -36,7 +37,7 @@ public class Main {
 
         
         // Start program infinite loop until it get closed
-        // "Timer" est plus adapté qu'une boucle "while()" pour rafraichir l'interface 
+        // "Timer" is more adapted than a "while()" loop to refresh the GUI 
             
         Timer t = new Timer(0, new ActionListener() {
 
