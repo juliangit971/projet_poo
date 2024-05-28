@@ -155,6 +155,8 @@ public class GameWindow {
             }
 		}
 
+		env.getGameVariables().getGameBoard().resetHexButtonsActionListener();
+
 
         // Revalidate to refresh the updated page
 		frame.revalidate();

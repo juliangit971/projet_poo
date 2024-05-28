@@ -2,12 +2,9 @@ package com.theisland.gameelements;
 
 import java.awt.Cursor;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JOptionPane;
 
 import com.theisland.enums.ImagePaths;
 import com.theisland.tiles.TileBeach;
@@ -62,12 +59,14 @@ public class GameBoard {
                 JButtonHexagon hexButton = new JButtonHexagon();
                 hexButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 hexButton.setBounds(posX + (BoardSlotProperties.SEPARATION_X * j), posY, 60, 66);
-                hexButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(null, "Hexagonal Button at position [" + boardSlot.getPosition().getX() + ", " + boardSlot.getPosition().getY() + "] Pressed!");
-                    }
-                });
+                
+                // DO NOT INITIALIZE BUTTON ACTION AT THE BEGINNING
+                // hexButton.addActionListener(new ActionListener() {
+                //     @Override
+                //     public void actionPerformed(ActionEvent e) {
+                //         JOptionPane.showMessageDialog(null, "Hexagonal Button at position [" + boardSlot.getPosition().getX() + ", " + boardSlot.getPosition().getY() + "] Pressed!");
+                //     }
+                // });
 
                 // Save the Button in the Slot & the Slot in the Button
                 hexButton.setBoardSlot(boardSlot);
@@ -78,7 +77,7 @@ public class GameBoard {
             }
 
             // Add the {@code List<BoardSlot>} to the list
-            boardSlots.add(rowOfSlots);
+            this.boardSlots.add(rowOfSlots);
 
             // Increment Y postion
             posY += BoardSlotProperties.SEPARATION_Y;
@@ -163,17 +162,17 @@ public class GameBoard {
                     switch (tileToUse) {
                         case 1:
                             hexButton.setBackgroundImage(beachTileImage);
-                            boardSlots.get(i).get(j).setTile(new TileBeach());
+                            this.boardSlots.get(i).get(j).setTile(new TileBeach());
                             break;
                         
                         case 2:
                             hexButton.setBackgroundImage(forestTileImage);
-                            boardSlots.get(i).get(j).setTile(new TileForest());
+                            this.boardSlots.get(i).get(j).setTile(new TileForest());
                             break;
                         
                         case 3:
                             hexButton.setBackgroundImage(mountainTileImage);
-                            boardSlots.get(i).get(j).setTile(new TileMountain());
+                            this.boardSlots.get(i).get(j).setTile(new TileMountain());
                             break;
                     }                      
                 }
@@ -184,6 +183,46 @@ public class GameBoard {
 		}
     }
 
+
+    /**
+     * Remove every 
+     */
+    public void resetHexButtonsActionListener() {
+
+        Integer buttonInRow = 0;
+		
+		for(int i = 0; i < BoardSlotProperties.ROW_AMOUNT; i++){
+
+			
+			if(i == 0 || i == 12) {
+                buttonInRow = BoardSlotProperties.BUTTON_TO_ADD_ROWS_0_12;
+            } else if(i == 5 || i == 7) {
+                buttonInRow = BoardSlotProperties.BUTTON_TO_ADD_ROWS_5_7;
+            } else if(i%2 == 1) {
+                buttonInRow =  BoardSlotProperties.BUTTON_TO_ADD_ROWS_ODD;
+            } else if(i%2 == 0) {
+                buttonInRow = BoardSlotProperties.BUTTON_TO_ADD_ROWS_EVEN;
+            } 
+
+            for(int j = 0; j < buttonInRow; j++) {
+				/**
+				 * "get(i)" : Get the row "i" containing an amount of slots
+				 * "get(j)" : Get the Slot at position [i, j] in the map
+				 */
+
+                JButtonHexagon hexButton = this.boardSlots.get(i).get(j).getHexagonButton();
+
+                // Remove every {@code ActionListener}
+                ActionListener[] listeners = hexButton.getActionListeners();
+                for (ActionListener listener : listeners) {
+                    hexButton.removeActionListener(listener);
+                }
+
+                // Remove {@code HAND_CURSOR} of the button
+                hexButton.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            }
+		}
+    }
 
     // Getters & Setters
 

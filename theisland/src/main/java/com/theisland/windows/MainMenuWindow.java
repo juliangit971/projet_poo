@@ -49,8 +49,7 @@ public class MainMenuWindow {
 		JButton playButton = new JButton("JOUER");
 		playButton.setFocusPainted(false);
 		playButton.setFont(new Font("Arial", Font.BOLD, 82));
-		playButton.setBounds(323, 427, 317, 126);
-
+		playButton.setBounds(301, 427, 360, 126);
         playButton.addActionListener(new ActionListener() {
 
 			@Override

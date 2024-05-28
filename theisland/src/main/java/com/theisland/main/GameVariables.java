@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.theisland.enums.GameProperties;
+import com.theisland.enums.GameStatus;
 import com.theisland.gameelements.GameBoard;
 import com.theisland.gameelements.MonsterDice;
 import com.theisland.pawns.PawnMonster;
@@ -23,7 +24,13 @@ public class GameVariables {
     // Player variables
     private List<Player> players;
 
+
+    // [#] Game Status Variables
+    private Player currentPlayerTurn;
+    private GameStatus currentGameStatus;
+
     
+
     /**
      * {@code GameVariables} Constructor
      */
@@ -31,9 +38,11 @@ public class GameVariables {
         this.gameBoard = new GameBoard();
         this.pawnMonsters = new ArrayList<>();
         this.players = new ArrayList<>();
+        this.currentGameStatus = GameStatus.INIT_PLACE_PLAYER_PAWNS;  // We need t oplace every pawn at the beginning of a game
     }
 
 
+    
     public void initPlayers() {
 
         for(int i = 0; i < Integer.parseInt( GameProperties.MAX_PLAYERS.getGameProperty() ); i++) {
@@ -80,5 +89,19 @@ public class GameVariables {
     }
     public void setPawnMonsters(List<PawnMonster> pawnMonsters) {
         this.pawnMonsters = pawnMonsters;
+    }
+
+    public Player getCurrentPlayerTurn() {
+        return currentPlayerTurn;
+    }
+    public void setCurrentPlayerTurn(Player currentPlayerTurn) {
+        this.currentPlayerTurn = currentPlayerTurn;
+    }
+
+    public GameStatus getCurrentGameStatus() {
+        return currentGameStatus;
+    }
+    public void setCurrentGameStatus(GameStatus currentGameStatus) {
+        this.currentGameStatus = currentGameStatus;
     }
 }

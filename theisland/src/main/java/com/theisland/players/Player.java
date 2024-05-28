@@ -10,6 +10,7 @@ import com.theisland.pawns.PawnBoat;
 import com.theisland.pawns.PawnExplorer;
 import com.theisland.pawns.PawnProperties;
 import com.theisland.pawns.enums.PawnExplorerColors;
+import com.theisland.tiles.Tile;
 
 public class Player {
 
@@ -17,10 +18,10 @@ public class Player {
     private PawnExplorerColors color;
     private List<PawnExplorer> ownedExplorers;
     private List<PawnExplorer> savedExplorers;
+	private List<Tile> ownedTiles;
     private List<PawnBoat> ownedBoat;
 
     
-
     public Player() {
         this.ownedExplorers = new ArrayList<>();
         this.savedExplorers = new ArrayList<>();
@@ -109,6 +110,13 @@ public class Player {
     public void setSavedExplorers(List<PawnExplorer> savedExplorers) {
         this.savedExplorers = savedExplorers;
     }
+
+	public List<Tile> getOwnedTiles() {
+		return ownedTiles;
+	}
+	public void setOwnedTiles(List<Tile> ownedTiles) {
+		this.ownedTiles = ownedTiles;
+	}
 
     public List<PawnBoat> getOwnedBoat() {
         return ownedBoat;
