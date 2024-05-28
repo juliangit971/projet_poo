@@ -14,13 +14,13 @@ import com.theisland.tiles.TileBeach;
 import com.theisland.tiles.TileForest;
 import com.theisland.tiles.TileMountain;
 import com.theisland.tiles.TileProperties;
-import com.theisland.utils.GeneralUtils;
-import com.theisland.utils.JButtonHexagon;
-import com.theisland.utils.Position;
+import com.theisland.utils.*;
 
 public class GameBoard {
 
     private List<List<BoardSlot>> boardSlots = new ArrayList<>();
+    Point firstClick = new Point(0,0);
+    Point secondClick = new Point(0,0);
 
 
     /**
@@ -65,7 +65,42 @@ public class GameBoard {
                 hexButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(null, "Hexagonal Button at position [" + boardSlot.getPosition().getX() + ", " + boardSlot.getPosition().getY() + "] Pressed!");
+
+                        //Selectionné le 1er le boutton
+                        if( firstClick.getX() == 0 && firstClick.getY() ==0 ){
+
+                            firstClick.setX(hexButton.getX());
+                            firstClick.setY(hexButton.getY());
+                            JOptionPane.showMessageDialog(null, "Selected Button");
+
+                        } //Deselectionner le boutton
+                        else if(firstClick.getX() == secondClick.getX() && firstClick.getY() == secondClick.getY() ) {
+
+                            firstClick.setX(0);
+                            firstClick.setY(0);
+                            JOptionPane.showMessageDialog(null, "Deselected Button");
+
+
+                        }else {
+                            secondClick.setX(hexButton.getX());
+                            secondClick.setY(hexButton.getY());
+
+                            MouveObjects mouveObjects = new MouveObjects(firstClick,secondClick);
+
+                            // Renvoie 1 si l'objets à été deplacé dans une case adjacente sinon  renvoi 0
+                             if( mouveObjects.ToMouveExplorer() == 1){
+
+                                 firstClick.setX(0);
+                                 firstClick.setY(0);
+                             };
+
+                        }
+
+
+
+                      //  JOptionPane.showMessageDialog(null, "First Click");
+
+
                     }
                 });
 
