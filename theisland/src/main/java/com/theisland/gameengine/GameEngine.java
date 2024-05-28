@@ -21,8 +21,6 @@ public class GameEngine {
         currentPlayerTurn.addOwnedExplorers( currentPlayerTurn.getExplorerToPlace().get(0) );
         boardSlot.addPawn(currentPlayerTurn.getExplorerToPlace().get(0));
 
-        System.out.println("ID : " + currentPlayerTurn.getID() + " ; Trésors : " + currentPlayerTurn.getExplorerToPlace().get(0).getTreasureAmount() );
-
         currentPlayerTurn.removeExplorerToPlace( currentPlayerTurn.getExplorerToPlace().get(0) );
 
         if(currentPlayerTurn.getID() == 4) {
@@ -31,5 +29,4 @@ public class GameEngine {
             env.getGameVariables().setCurrentPlayerTurn( env.getGameVariables().getPlayers().get(currentPlayerTurn.getID()) );
         }
     }
-
 }
