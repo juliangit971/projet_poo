@@ -28,7 +28,7 @@ public class BoardSlotProperties {
      */
     final static public int POS_Y_INIT = 15;
 
-    final static public int POS_X_ROWS_0_12 = 169;
+    final static public int POS_X_ROWS_0_12 = 167;
     final static public int POS_X_ROWS_5_7 = 34;
     final static public int POS_X_ROWS_ODD = 87;
     final static public int POS_X_ROWS_EVEN = 60;

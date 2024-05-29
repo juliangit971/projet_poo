@@ -66,7 +66,7 @@ public class GameEngine {
 
             firstClick.setX(hexButtonClicked.getX());
             firstClick.setY(hexButtonClicked.getY());
-            JOptionPane.showMessageDialog(null, "Selected Button");
+            // JOptionPane.showMessageDialog(null, "Pions sélectionné");
 
             System.out.println("### RES 1 ###");
             System.out.println("firstClick.getX() = " + firstClick.getX() + " ; firstClick.getY() = " + firstClick.getY() + " ; secondClick.getX() = " + secondClick.getX() + " ; secondClick.getY() = " + secondClick.getY());
@@ -78,7 +78,7 @@ public class GameEngine {
 
             firstClick.setX(0);
             firstClick.setY(0);
-            JOptionPane.showMessageDialog(null, "Deselected Button");
+            JOptionPane.showMessageDialog(null, "Pion déselectionné");
 
             // Update Env Variables
 			env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
@@ -97,6 +97,15 @@ public class GameEngine {
                 firstClick.setX(0);
                 firstClick.setY(0);
 
+                // [#] Change the "BoardSlot" of the pawn
+                    // Add Pawn to the new "BoardSlot"
+                hexButtonClicked.getBoardSlot().addPawn(concernedPawn);
+                    // Remove Pawn from its old "BoardSlot"
+                concernedPawn.getCurrentBoardSlot().removePawn(concernedPawn);
+                    // Change Pawn's "currentBoardSlot"
+                concernedPawn.setCurrentBoardSlot(hexButtonClicked.getBoardSlot());
+                
+
                 // Update Env Variables
 			    env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
             };
@@ -114,13 +123,13 @@ public class GameEngine {
      * Move a {@code PawnExplorer and change some settings of the player and the pawn}
      * @return {@code 1} if the pawn has been moves successfully, {@code 0} if not
      */
-    private static int movePawnExplorer(Pawn pawn, EnvironmentVariables env) {
+    private static int movePawnExplorer(Pawn pawnToMove, EnvironmentVariables env) {
 
         System.out.println("### ENTREE DANS \"movePawnExplorer()\" ###");
 
         Position firstClick = env.getGameVariables().getGameBoard().getFirstClickOnBoard();
         Position secondClick = env.getGameVariables().getGameBoard().getSecondClickOnBoard();
-        // BoardSlot boardSlot = pawn.getCurrentBoardSlot();
+        // BoardSlot oldBoardSlot = pawnToMove.getCurrentBoardSlot();
 
         System.out.println("### RES 4 ###");
         System.out.println("firstClick.getX() = " + firstClick.getX() + " ; firstClick.getY() = " + firstClick.getY() + " ; secondClick.getX() = " + secondClick.getX() + " ; secondClick.getY() = " + secondClick.getY());
@@ -136,17 +145,7 @@ public class GameEngine {
             if(firstClick.getX()-53 == secondClick.getX()) {
                 System.out.println("LEFT NEIGBOR");
 
-                JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Gauche");
-
-                // env.getGameVariables().getGameBoard().getBoardSlots().get( boardSlot.getPosition().getX() ).stream().forEach(bs -> {
-                    
-                //     if(boardSlot.getPosition().getX()-1 == bs.getPosition().getX()) {
-
-                //         pawn.setCurrentBoardSlot(bs);
-                //         boardSlot.removePawn(pawn);
-                //     }
-
-                // });
+                // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Gauche");
 
                 return 1;
 
@@ -155,40 +154,40 @@ public class GameEngine {
                 System.out.println("RIGHT NEIGBOR");
 
 
-                JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Droite");
+                // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Droite");
                 return 1;
             }
         
         // Bottom-Left Neighbor
-        } else if(firstClick.getX()-27 == secondClick.getX() && firstClick.getY()+45 == secondClick.getY()){
+        } else if( ((firstClick.getX()-27 == secondClick.getX()) || (firstClick.getX()-26 == secondClick.getX())) && firstClick.getY()+45 == secondClick.getY()){
 
             System.out.println("BOT LEFT NEIGBOR");
 
-            JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Bas à Gauche");
+            // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Bas à Gauche");
             return 1;
 
         // Top-Left Neighbor
-        } else if(firstClick.getX()-27 == secondClick.getX() && firstClick.getY()-45 == secondClick.getY()){
+        } else if( ((firstClick.getX()-27 == secondClick.getX()) || (firstClick.getX()-26 == secondClick.getX())) && firstClick.getY()-45 == secondClick.getY()){
 
             System.out.println("TOP LEFT NEIGBOR");
 
-            JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Haut à Gauche");
+            // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Haut à Gauche");
             return 1;
 
         // Top-Right Neighbor
-        } else if(firstClick.getX()+26 == secondClick.getX() && firstClick.getY()-45 == secondClick.getY()){
+        } else if( ((firstClick.getX()+26 == secondClick.getX()) || (firstClick.getX()+27 == secondClick.getX())) && firstClick.getY()-45 == secondClick.getY()){
 
             System.out.println("TOP RIGHT NEIGBOR");
 
-            JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Haut à Droite");
+            // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Haut à Droite");
             return 1;
 
         // Bottom-Right Neighbor
-        } else if(firstClick.getX()+26 == secondClick.getX() && firstClick.getY()+45 == secondClick.getY()){
+        } else if( ((firstClick.getX()+26 == secondClick.getX()) || (firstClick.getX()+27 == secondClick.getX())) && firstClick.getY()+45 == secondClick.getY()){
 
             System.out.println("BOTTOM RIGHT NEIGBOR");
 
-            JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Bas à Droite");
+            // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Bas à Droite");
             return 1;
 
         }
