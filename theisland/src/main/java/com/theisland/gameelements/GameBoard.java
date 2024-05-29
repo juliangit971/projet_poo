@@ -19,6 +19,10 @@ public class GameBoard {
 
     private List<List<BoardSlot>> boardSlots = new ArrayList<>();
 
+    // [#] Useful variables to use when someone want to move a pawn
+    private Position firstClickOnBoard = new Position(0,0);
+    private Position secondClickOnBoard = new Position(0,0);
+
 
     /**
      * Create every {@code BoardSlot} needed for the {@code GameBoard}
@@ -60,13 +64,7 @@ public class GameBoard {
                 // hexButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 hexButton.setBounds(posX + (BoardSlotProperties.SEPARATION_X * j), posY, 60, 66);
                 
-                // DO NOT INITIALIZE BUTTON ACTION AT THE BEGINNING
-                // hexButton.addActionListener(new ActionListener() {
-                //     @Override
-                //     public void actionPerformed(ActionEvent e) {
-                //         JOptionPane.showMessageDialog(null, "Hexagonal Button at position [" + boardSlot.getPosition().getX() + ", " + boardSlot.getPosition().getY() + "] Pressed!");
-                //     }
-                // });
+                // DO NOT INITIALIZE BUTTON ACTION HERE, NOT USEFUL
 
                 // Save the Button in the Slot & the Slot in the Button
                 hexButton.setBoardSlot(boardSlot);
@@ -232,5 +230,20 @@ public class GameBoard {
     }
     public void setBoardSlots(List<List<BoardSlot>> boardSlots) {
         this.boardSlots = boardSlots;
+    }
+
+
+    public Position getFirstClickOnBoard() {
+        return firstClickOnBoard;
+    }
+    public void setFirstClickOnBoard(Position firstClickOnBoard) {
+        this.firstClickOnBoard = firstClickOnBoard;
+    }
+
+    public Position getSecondClickOnBoard() {
+        return secondClickOnBoard;
+    }
+    public void setSecondClickOnBoard(Position secondClickOnBoard) {
+        this.secondClickOnBoard = secondClickOnBoard;
     }
 }

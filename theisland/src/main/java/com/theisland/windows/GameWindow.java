@@ -14,7 +14,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -23,11 +22,13 @@ import javax.swing.border.LineBorder;
 import com.theisland.enums.GameStatus;
 import com.theisland.enums.ImagePaths;
 import com.theisland.enums.WindowNames;
+import com.theisland.gameelements.BoardSlot;
 import com.theisland.gameelements.BoardSlotProperties;
 import com.theisland.gameengine.GameEngine;
 import com.theisland.main.EnvironmentVariables;
 import com.theisland.misc.EnhancedLog;
 import com.theisland.pawns.Pawn;
+import com.theisland.pawns.PawnExplorer;
 import com.theisland.pawns.PawnProperties;
 import com.theisland.utils.JButtonHexagon;
 
@@ -35,6 +36,7 @@ public class GameWindow {
 
 
     private EnvironmentVariables env;
+	private Pawn selectedPawn;
 
 
 	public GameWindow(EnvironmentVariables env) {
@@ -231,14 +233,134 @@ public class GameWindow {
 				// If there are no more "BoardSlot" to place an Explorer, go to another action
 				if(nonClickableButtons == PawnProperties.AMOUNT_EXPLORERS_TOTAL) {
 
-					JOptionPane.showMessageDialog(null, "Vous avez fini de placer les explorateurs !");
+					System.out.println("Vous avez fini de placer les explorateurs !");
 
-					env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
-					env.setRefreshWindow(true);
+					// WE'RE OBLIGED TO CLICK A BUTTON TO SWITCH TO THE NEXT STEP
+					JButton nextStepButton = new JButton("Etape suivante >");
+					nextStepButton.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// Update environmet variables
+							env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
+							env.setRefreshWindow(true);
+						}
+					});
+					
+					westPanel.add(nextStepButton);
 				}
 
 				break;
 		
+
+
+			// Move a pawn
+			case SELECT_PLAYER_TO_MOVE:
+
+				// Check every button
+				Integer buttonInRow = 0;
+				
+				for(int i = 0; i < BoardSlotProperties.ROW_AMOUNT; i++){
+
+					
+					if(i == 0 || i == 12) {
+						buttonInRow = BoardSlotProperties.BUTTON_TO_ADD_ROWS_0_12;
+					} else if(i == 5 || i == 7) {
+						buttonInRow = BoardSlotProperties.BUTTON_TO_ADD_ROWS_5_7;
+					} else if(i%2 == 1) {
+						buttonInRow =  BoardSlotProperties.BUTTON_TO_ADD_ROWS_ODD;
+					} else if(i%2 == 0) {
+						buttonInRow = BoardSlotProperties.BUTTON_TO_ADD_ROWS_EVEN;
+					} 
+
+					for(int j = 0; j < buttonInRow; j++) {
+						/**
+						 * "get(i)" : Get the row "i" containing an amount of slots
+						 * "get(j)" : Get the Slot at position [i, j] in the map
+						 */
+
+						BoardSlot boardSlot = env.getGameVariables().getGameBoard().getBoardSlots().get(i).get(j);
+
+						// Necessary to do this or else it doesn't work in the "forEach" method
+						Integer valI = i;
+						Integer valJ = j;
+
+						// Check for each pawn of a "BoardSlot"
+						boardSlot.getPawns().stream().forEach(pawn -> {
+							
+							if(pawn instanceof PawnExplorer) {
+								PawnExplorer explorer = (PawnExplorer) pawn;
+								
+								// If "PawnExplorerColor" is the same as the Player's Color
+								if(explorer.getColor().equals( env.getGameVariables().getCurrentPlayerTurn().getColor() )) {
+
+									JButtonHexagon hexButton = env.getGameVariables().getGameBoard().getBoardSlots().get(valI).get(valJ).getHexagonButton();
+
+									hexButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+									hexButton.addActionListener(new ActionListener() {
+
+										@Override
+										public void actionPerformed(ActionEvent e) {
+											selectedPawn = pawn;
+											GameEngine.movePawn(hexButton, pawn, env);
+
+											// Update Env Variables
+											env.getGameVariables().setCurrentGameStatus(GameStatus.MOVE_SELECTED_PLAYER);
+											env.setRefreshWindow(true);
+										}
+									});
+
+								}
+							}
+						});
+						
+
+						mapPanel.add( env.getGameVariables().getGameBoard().getBoardSlots().get(i).get(j).getHexagonButton() );
+					}
+				}
+
+				break;
+
+			case MOVE_SELECTED_PLAYER:
+				
+				// Check every button
+				Integer buttonToBeChecked = 0;
+				
+				for(int i = 0; i < BoardSlotProperties.ROW_AMOUNT; i++){
+
+					
+					if(i == 0 || i == 12) {
+						buttonToBeChecked = BoardSlotProperties.BUTTON_TO_ADD_ROWS_0_12;
+					} else if(i == 5 || i == 7) {
+						buttonToBeChecked = BoardSlotProperties.BUTTON_TO_ADD_ROWS_5_7;
+					} else if(i%2 == 1) {
+						buttonToBeChecked =  BoardSlotProperties.BUTTON_TO_ADD_ROWS_ODD;
+					} else if(i%2 == 0) {
+						buttonToBeChecked = BoardSlotProperties.BUTTON_TO_ADD_ROWS_EVEN;
+					} 
+
+					for(int j = 0; j < buttonToBeChecked; j++) {
+						/**
+						 * "get(i)" : Get the row "i" containing an amount of slots
+						 * "get(j)" : Get the Slot at position [i, j] in the map
+						 */
+
+						JButtonHexagon hexButton = env.getGameVariables().getGameBoard().getBoardSlots().get(i).get(j).getHexagonButton();
+						hexButton.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								GameEngine.movePawn(hexButton, selectedPawn, env);
+								//selectedPawn = null;
+
+								// Update Env Variables
+								// env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
+								env.setRefreshWindow(true);
+							}
+						});
+					}
+				}
+
+				break;
+
 			default:
 				break;
 		}

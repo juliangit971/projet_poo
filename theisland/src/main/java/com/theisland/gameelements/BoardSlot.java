@@ -19,7 +19,9 @@ public class BoardSlot {
 
     
     /*
-     * To know in which row and line the Slot is
+     * To know in which row and column the Slot is
+     * x : Row
+     * y : column
      */
     private Position position;
 
@@ -34,9 +36,8 @@ public class BoardSlot {
     public void addPawn(Pawn pawn) {
         this.pawns.add(pawn);
     }
-
-    public void removePawn(int index) {
-        this.pawns.remove(index);
+    public void removePawn(Pawn pawnToRemove) {
+        this.pawns.remove(pawnToRemove);
     }
 
 

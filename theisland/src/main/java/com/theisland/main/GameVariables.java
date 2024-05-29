@@ -28,8 +28,10 @@ public class GameVariables {
     // [#] Game Status Variables
     private Player currentPlayerTurn;
     private GameStatus currentGameStatus;
+    // Number of turn available before switching to another player
+    private Integer numberOfTurn;
 
-    
+
 
     /**
      * {@code GameVariables} Constructor
@@ -106,5 +108,12 @@ public class GameVariables {
     }
     public void setCurrentGameStatus(GameStatus currentGameStatus) {
         this.currentGameStatus = currentGameStatus;
+    }
+
+    public Integer getNumberOfTurn() {
+        return numberOfTurn;
+    }
+    public void setNumberOfTurn(Integer numberOfTurn) {
+        this.numberOfTurn = numberOfTurn;
     }
 }
