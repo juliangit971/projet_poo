@@ -16,31 +16,4 @@ public class PawnProperties {
     final static public int AMOUNT_SHARKS = 6;
     final static public int AMOUNT_WHALES = 5;
 
-
-    // Getters
-
-
-    public Integer getAmountExplorersPerPlayers() {
-        return AMOUNT_EXPLORERS_PER_PLAYERS;
-    }
-
-    public Integer getAmountExplorersTotal() {
-        return AMOUNT_EXPLORERS_TOTAL;
-    }
-
-    public List<Integer> getTreasureValues() {
-        return TREASURE_VALUES;
-    }
-
-    public Integer getAmountSnakes() {
-        return AMOUNT_SNAKES;
-    }
-    
-    public Integer getAmountSharks() {
-        return AMOUNT_SHARKS;
-    }
-
-    public Integer getAmountWhales() {
-        return AMOUNT_WHALES;
-    } 
 }
