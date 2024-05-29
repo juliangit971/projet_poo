@@ -55,23 +55,12 @@ public class GameEngine {
 
         Position firstClick = env.getGameVariables().getGameBoard().getFirstClickOnBoard();
         Position secondClick = env.getGameVariables().getGameBoard().getSecondClickOnBoard();
-
-        System.out.println("### BEGINING ###");
-        System.out.println("firstClick.getX() = " + firstClick.getX() + " ; firstClick.getY() = " + firstClick.getY() + " ; secondClick.getX() = " + secondClick.getX() + " ; secondClick.getY() = " + secondClick.getY());
-        System.out.println("hexButtonClicked.getX() = " + hexButtonClicked.getX() + " ; hexButtonClicked.getY() = " + hexButtonClicked.getY());
-
         
         //Selectionné le 1er le boutton [OK]
         if(firstClick.getX() == 0 && firstClick.getY() ==0) {
 
             firstClick.setX(hexButtonClicked.getX());
             firstClick.setY(hexButtonClicked.getY());
-            // JOptionPane.showMessageDialog(null, "Pions sélectionné");
-
-            System.out.println("### RES 1 ###");
-            System.out.println("firstClick.getX() = " + firstClick.getX() + " ; firstClick.getY() = " + firstClick.getY() + " ; secondClick.getX() = " + secondClick.getX() + " ; secondClick.getY() = " + secondClick.getY());
-            System.out.println("hexButtonClicked.getX() = " + hexButtonClicked.getX() + " ; hexButtonClicked.getY() = " + hexButtonClicked.getY());
-
 
         } // Deselectionner le boutton [OK]
         else if(firstClick.getX() == hexButtonClicked.getX() && firstClick.getY() == hexButtonClicked.getY()) {
@@ -84,13 +73,11 @@ public class GameEngine {
 			env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
 
         
-        // Sélection du 2e bouton 
+        // Sélection du 2e bouton [OK]
         } else {
 
             secondClick.setX(hexButtonClicked.getX());
             secondClick.setY(hexButtonClicked.getY());
-
-            // MouveObjects mouveObjects = new MouveObjects(firstClick,secondClick);
 
             // Renvoie 1 si l'objets à été deplacé dans une case adjacente sinon  renvoi 0
             if(movePawnExplorer(concernedPawn, env) == 1){
@@ -104,16 +91,10 @@ public class GameEngine {
                 concernedPawn.getCurrentBoardSlot().removePawn(concernedPawn);
                     // Change Pawn's "currentBoardSlot"
                 concernedPawn.setCurrentBoardSlot(hexButtonClicked.getBoardSlot());
-                
 
-                // Update Env Variables
+                // [#] Update Env Variables
 			    env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
             };
-
-            System.out.println("### RES 3 ###");
-            System.out.println("firstClick.getX() = " + firstClick.getX() + " ; firstClick.getY() = " + firstClick.getY() + " ; secondClick.getX() = " + secondClick.getX() + " ; secondClick.getY() = " + secondClick.getY());
-            System.out.println("hexButtonClicked.getX() = " + hexButtonClicked.getX() + " ; hexButtonClicked.getY() = " + hexButtonClicked.getY());
-
         }
     }
 
@@ -129,67 +110,34 @@ public class GameEngine {
 
         Position firstClick = env.getGameVariables().getGameBoard().getFirstClickOnBoard();
         Position secondClick = env.getGameVariables().getGameBoard().getSecondClickOnBoard();
-        // BoardSlot oldBoardSlot = pawnToMove.getCurrentBoardSlot();
-
-        System.out.println("### RES 4 ###");
-        System.out.println("firstClick.getX() = " + firstClick.getX() + " ; firstClick.getY() = " + firstClick.getY() + " ; secondClick.getX() = " + secondClick.getX() + " ; secondClick.getY() = " + secondClick.getY());
-        System.out.println("secondClick.getX() = " + secondClick.getX() + " ; secondClick.getY() = " + secondClick.getY());
-
 
         //Si le premier et le second clicks ont les même ordonnées
         if(firstClick.getY() == secondClick.getY()){
 
-            System.out.println("IF 1");
-
             // Left Neighbor
             if(firstClick.getX()-53 == secondClick.getX()) {
-                System.out.println("LEFT NEIGBOR");
-
-                // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Gauche");
-
                 return 1;
 
             // Right Neighbor
             } else if(firstClick.getX()+53 == secondClick.getX()){
-                System.out.println("RIGHT NEIGBOR");
-
-
-                // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Droite");
                 return 1;
             }
         
         // Bottom-Left Neighbor
         } else if( ((firstClick.getX()-27 == secondClick.getX()) || (firstClick.getX()-26 == secondClick.getX())) && firstClick.getY()+45 == secondClick.getY()){
-
-            System.out.println("BOT LEFT NEIGBOR");
-
-            // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Bas à Gauche");
             return 1;
 
         // Top-Left Neighbor
         } else if( ((firstClick.getX()-27 == secondClick.getX()) || (firstClick.getX()-26 == secondClick.getX())) && firstClick.getY()-45 == secondClick.getY()){
-
-            System.out.println("TOP LEFT NEIGBOR");
-
-            // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Haut à Gauche");
             return 1;
 
         // Top-Right Neighbor
         } else if( ((firstClick.getX()+26 == secondClick.getX()) || (firstClick.getX()+27 == secondClick.getX())) && firstClick.getY()-45 == secondClick.getY()){
-
-            System.out.println("TOP RIGHT NEIGBOR");
-
-            // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Haut à Droite");
             return 1;
 
         // Bottom-Right Neighbor
         } else if( ((firstClick.getX()+26 == secondClick.getX()) || (firstClick.getX()+27 == secondClick.getX())) && firstClick.getY()+45 == secondClick.getY()){
-
-            System.out.println("BOTTOM RIGHT NEIGBOR");
-
-            // JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Bas à Droite");
             return 1;
-
         }
         return 0;
     }
