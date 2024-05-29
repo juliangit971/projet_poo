@@ -37,11 +37,7 @@ public class GameEngine {
         currentPlayerTurn.removeExplorerToPlace( currentPlayerTurn.getExplorerToPlace().get(0) );
 
         // Switch Player's turn
-        if(currentPlayerTurn.getID() == 4) {
-            env.getGameVariables().setCurrentPlayerTurn( env.getGameVariables().getPlayers().get(0) );
-        } else {
-            env.getGameVariables().setCurrentPlayerTurn( env.getGameVariables().getPlayers().get(currentPlayerTurn.getID()) );
-        }
+        switchPlayerTurn(env);
     }
 
 
@@ -79,7 +75,7 @@ public class GameEngine {
             secondClick.setX(hexButtonClicked.getX());
             secondClick.setY(hexButtonClicked.getY());
 
-            // Renvoie 1 si l'objets à été deplacé dans une case adjacente sinon  renvoi 0
+            // If the pawn can be moved
             if(movePawnExplorer(concernedPawn, env) == 1){
                 firstClick.setX(0);
                 firstClick.setY(0);
@@ -93,7 +89,15 @@ public class GameEngine {
                 concernedPawn.setCurrentBoardSlot(hexButtonClicked.getBoardSlot());
 
                 // [#] Update Env Variables
+                    // Go back to Pawn selection 
 			    env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
+                    // Reduce number of turn 
+                env.getGameVariables().setNumberOfTurn( env.getGameVariables().getNumberOfTurn() - 1 );
+                    // If nuber of turn reached 0, change player
+                if(env.getGameVariables().getNumberOfTurn() == 0) {
+                    env.getGameVariables().setNumberOfTurn(3);
+                    switchPlayerTurn(env);
+                }
             };
         }
     }
@@ -102,7 +106,7 @@ public class GameEngine {
 
     /**
      * Move a {@code PawnExplorer and change some settings of the player and the pawn}
-     * @return {@code 1} if the pawn has been moves successfully, {@code 0} if not
+     * @return {@code 1} if the pawn can move to the selected {@code BoardSlot}, {@code 0} if not
      */
     private static int movePawnExplorer(Pawn pawnToMove, EnvironmentVariables env) {
 
@@ -138,5 +142,21 @@ public class GameEngine {
             return 1;
         }
         return 0;
+    }
+
+
+    /**
+     * Switch to the next player in order to change turn
+     * @param env the {@code EnvironmentVariables} to use
+     */
+    public static void switchPlayerTurn(EnvironmentVariables env) {
+
+        Player currentPlayerTurn = env.getGameVariables().getCurrentPlayerTurn();
+
+        if(currentPlayerTurn.getID() == 4) {
+            env.getGameVariables().setCurrentPlayerTurn( env.getGameVariables().getPlayers().get(0) );
+        } else {
+            env.getGameVariables().setCurrentPlayerTurn( env.getGameVariables().getPlayers().get(currentPlayerTurn.getID()) );
+        }
     }
 }

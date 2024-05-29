@@ -28,7 +28,7 @@ public class GameVariables {
     // [#] Game Status Variables
     private Player currentPlayerTurn;
     private GameStatus currentGameStatus;
-    // Number of turn available before switching to another player
+    // Number of turn available before switching to another player (during normal game)
     private Integer numberOfTurn;
 
 
@@ -41,6 +41,7 @@ public class GameVariables {
         this.pawnMonsters = new ArrayList<>();
         this.players = new ArrayList<>();
         this.currentGameStatus = GameStatus.INIT_PLACE_PLAYER_PAWNS;  // We need t oplace every pawn at the beginning of a game
+        this.numberOfTurn = 3;
     }
 
 

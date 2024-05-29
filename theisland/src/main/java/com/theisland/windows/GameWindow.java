@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,6 +26,7 @@ import com.theisland.gameelements.BoardSlot;
 import com.theisland.gameelements.BoardSlotProperties;
 import com.theisland.gameengine.GameEngine;
 import com.theisland.main.EnvironmentVariables;
+import com.theisland.misc.EnhancedLog;
 import com.theisland.pawns.Pawn;
 import com.theisland.pawns.PawnExplorer;
 import com.theisland.pawns.PawnProperties;
@@ -48,6 +48,7 @@ public class GameWindow {
 
 		// Env Variables Update
 		if(env.getIsGameWindowInitialized() == false) {
+			EnhancedLog.eventLogger("Window \"" + WindowNames.DEFAULT.getWindowName() + "\" set !" , "INFO");
 			env.setIsGameWindowInitialized(true);
 		}
         
@@ -83,6 +84,8 @@ public class GameWindow {
 
 		if(env.getGameVariables().getCurrentPlayerTurn().getID() == 2) {
 			player2Label.setBorder(new LineBorder(Color.RED, 2, true));
+		} else {
+			player2Label.setBorder(new LineBorder(Color.BLACK, 2, true));
 		}
 
 		northPanel.add(player2Label, BorderLayout.WEST);
@@ -101,13 +104,12 @@ public class GameWindow {
 
 		if(env.getGameVariables().getCurrentPlayerTurn().getID() == 1) {
 			player1Label.setBorder(new LineBorder(Color.RED, 2, true));
+		} else {
+			player1Label.setBorder(new LineBorder(Color.BLACK, 2, true));
 		}
 
 		westPanel.add(player1Label);
-		
-		JButton shuffleTilesButton = new JButton("Shuffle Tiles");
-		westPanel.add(shuffleTilesButton);
-		
+
 
 		// South Panel
 		JPanel southPanel = new JPanel();
@@ -123,6 +125,8 @@ public class GameWindow {
 
 		if(env.getGameVariables().getCurrentPlayerTurn().getID() == 4) {
 			player4Label.setBorder(new LineBorder(Color.RED, 2, true));
+		} else {
+			player4Label.setBorder(new LineBorder(Color.BLACK, 2, true));
 		}
 
 		southPanel.add(player4Label, BorderLayout.WEST);
@@ -141,6 +145,8 @@ public class GameWindow {
 
 		if(env.getGameVariables().getCurrentPlayerTurn().getID() == 3) {
 			player3Label.setBorder(new LineBorder(Color.RED, 2, true));
+		} else {
+			player3Label.setBorder(new LineBorder(Color.BLACK, 2, true));
 		}
 
 		eastPanel.add(player3Label);

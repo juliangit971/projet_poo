@@ -30,7 +30,12 @@ public enum ImagePaths {
     PAWN_EXPLORER_BLUE("gui/pawn_explorer_blue.png"),
     PAWN_EXPLORER_GREEN("gui/pawn_explorer_green.png"),
     PAWN_EXPLORER_RED("gui/pawn_explorer_red.png"),
-    PAWN_EXPLORER_YELLOW("gui/pawn_explorer_yellow.png");
+    PAWN_EXPLORER_YELLOW("gui/pawn_explorer_yellow.png"),
+    // ** Pawn Explorer (mini)
+    MINI_PAWN_EXPLORER_BLUE("gui/mini_pawn_explorer_blue.png"),
+    MINI_PAWN_EXPLORER_GREEN("gui/mini_pawn_explorer_green.png"),
+    MINI_PAWN_EXPLORER_RED("gui/mini_pawn_explorer_red.png"),
+    MINI_PAWN_EXPLORER_YELLOW("gui/mini_pawn_explorer_yellow.png");
 
 
     private String imagePath;

@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Shape;
 import java.awt.geom.Path2D;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 
@@ -44,7 +45,7 @@ public class JButtonHexagon extends JButton {
         // If there are pawns on the button
         if(this.boardSlot.getPawns().size() > 0) {
 
-            // If there's only 1 pawn on the Slot
+            // If there's only 1 Pawn on the Slot
             if(this.boardSlot.getPawns().size() == 1) {
 
                 if(this.boardSlot.getPawns().get(0) instanceof PawnExplorer) {
@@ -60,20 +61,76 @@ public class JButtonHexagon extends JButton {
                             g.drawImage(ImagePaths.PAWN_EXPLORER_BLUE.getImageForPanelBGImage(), 10, 7, null);
                             break;
 
-                        case GREEN:
-                            g.drawImage(ImagePaths.PAWN_EXPLORER_GREEN.getImageForPanelBGImage(), 10, 7, null);
-                            break;
-
                         case YELLOW:
                             g.drawImage(ImagePaths.PAWN_EXPLORER_YELLOW.getImageForPanelBGImage(), 12, 7, null);
                             break;
+
+                        case GREEN:
+                            g.drawImage(ImagePaths.PAWN_EXPLORER_GREEN.getImageForPanelBGImage(), 10, 7, null);
+                            break;                        
                     }
                 }
             
+            // Esle if there are more than 1 Pawn
+            } else {
+
+                HashMap<String, Boolean> boolMap = new HashMap<>();
+                // PawnExplorer
+                boolMap.put("isRedExplorerPlaced", false);
+                boolMap.put("isBlueExplorerPlaced", false);
+                boolMap.put("isGreenExplorerPlaced", false);
+                boolMap.put("isYellowExplorerPlaced", false);
+                // PawnMonster
+                boolMap.put("isSharkPlaced", false);
+                boolMap.put("isSnakePlaced", false);
+                boolMap.put("isWhalePlaced", false);
+                // PawnBoat
+                boolMap.put("isBoatPlaced", false);
+                
+
+                this.boardSlot.getPawns().stream().forEach(pwn -> {
+                    if(pwn instanceof PawnExplorer) {
+
+                        PawnExplorer explorer = (PawnExplorer) pwn;
+    
+                        switch (explorer.getColor()) {
+                            case RED:
+
+                                if(boolMap.get("isRedExplorerPlaced") == false) {
+                                    g.drawImage(ImagePaths.MINI_PAWN_EXPLORER_RED.getImageForPanelBGImage(), 10, 20, null);
+                                    boolMap.put("isRedExplorerPlaced", true);
+                                }
+                                break;
+    
+                            case BLUE:
+
+                                if(boolMap.get("isBlueExplorerPlaced") == false) {
+                                    g.drawImage(ImagePaths.MINI_PAWN_EXPLORER_BLUE.getImageForPanelBGImage(), 20, 20, null);
+                                    boolMap.put("isBlueExplorerPlaced", true);
+                                }
+                                break;
+
+                            case YELLOW:
+
+                                if(boolMap.get("isYellowExplorerPlaced") == false) {
+                                    g.drawImage(ImagePaths.MINI_PAWN_EXPLORER_YELLOW.getImageForPanelBGImage(), 32, 20, null);
+                                    boolMap.put("isYellowExplorerPlaced", true);
+                                }
+                                break;
+    
+                            case GREEN:
+
+                                if(boolMap.get("isGreenExplorerPlaced") == false) {
+                                    g.drawImage(ImagePaths.MINI_PAWN_EXPLORER_GREEN.getImageForPanelBGImage(), 40, 20, null);
+                                    boolMap.put("isGreenExplorerPlaced", true);
+                                }
+                                break;
+                        }
+                    }
+                });
             }
 
         } 
-
     }
 
 
