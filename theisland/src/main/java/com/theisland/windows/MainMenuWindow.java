@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import com.theisland.enums.ImagePaths;
 import com.theisland.enums.WindowNames;
 import com.theisland.main.EnvironmentVariables;
-import com.theisland.misc.EnhancedLog;
 
 public class MainMenuWindow {
 
@@ -66,9 +65,5 @@ public class MainMenuWindow {
 
         // Revalidate to refresh the updated page
 		frame.revalidate();
-
-        
-        // Log
-        EnhancedLog.eventLogger("Window \"" + WindowNames.MAIN_MENU.getWindowName() + "\" set !" , "INFO");
     }
 }

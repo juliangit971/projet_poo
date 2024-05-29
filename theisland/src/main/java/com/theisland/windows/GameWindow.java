@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -26,7 +27,6 @@ import com.theisland.gameelements.BoardSlot;
 import com.theisland.gameelements.BoardSlotProperties;
 import com.theisland.gameengine.GameEngine;
 import com.theisland.main.EnvironmentVariables;
-import com.theisland.misc.EnhancedLog;
 import com.theisland.pawns.Pawn;
 import com.theisland.pawns.PawnExplorer;
 import com.theisland.pawns.PawnProperties;
@@ -45,6 +45,11 @@ public class GameWindow {
 
 
     public void setView(JFrame frame) {
+
+		// Env Variables Update
+		if(env.getIsGameWindowInitialized() == false) {
+			env.setIsGameWindowInitialized(true);
+		}
         
         // Reset frame to make it empty
         WindowUtils.resetWindow(frame);
@@ -232,21 +237,9 @@ public class GameWindow {
 
 				// If there are no more "BoardSlot" to place an Explorer, go to another action
 				if(nonClickableButtons == PawnProperties.AMOUNT_EXPLORERS_TOTAL) {
-
-					System.out.println("Vous avez fini de placer les explorateurs !");
-
-					// WE'RE OBLIGED TO CLICK A BUTTON TO SWITCH TO THE NEXT STEP
-					JButton nextStepButton = new JButton("Etape suivante >");
-					nextStepButton.addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							// Update environmet variables
-							env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
-							env.setRefreshWindow(true);
-						}
-					});
-					
-					westPanel.add(nextStepButton);
+					JOptionPane.showMessageDialog(null, "Vous avez fini de placer tous les explorateurs !");
+					env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
+					env.setRefreshWindow(true);
 				}
 
 				break;
@@ -375,9 +368,5 @@ public class GameWindow {
 
         // Revalidate to refresh the updated page
 		frame.revalidate();
-
-        
-        // Log
-        EnhancedLog.eventLogger("Window \"" + WindowNames.DEFAULT.getWindowName() + "\" set !" , "INFO");
     }
 }

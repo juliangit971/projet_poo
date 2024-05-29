@@ -8,6 +8,9 @@ public class EnvironmentVariables {
     private Boolean resetWindowPosition;
     private WindowNames currentWindow;
     private boolean refreshWindow;
+    // Make us able to know if the "GameWindow" already has been initialized at least once (not very useful at the moment)
+    private boolean isGameWindowInitialized;
+    
     private GameVariables gameVariables;
 
 
@@ -17,6 +20,7 @@ public class EnvironmentVariables {
         this.currentWindow = WindowNames.MAIN_MENU;
         this.refreshWindow = true;
         this.gameVariables = new GameVariables();
+        this.isGameWindowInitialized = false;
     }
 
 
@@ -49,5 +53,12 @@ public class EnvironmentVariables {
     }
     public void setGameVariables(GameVariables gameVariables) {
         this.gameVariables = gameVariables;
+    }
+
+    public boolean getIsGameWindowInitialized() {
+        return isGameWindowInitialized;
+    }
+    public void setIsGameWindowInitialized(boolean isGameWindowInitialized) {
+        this.isGameWindowInitialized = isGameWindowInitialized;
     }
 }

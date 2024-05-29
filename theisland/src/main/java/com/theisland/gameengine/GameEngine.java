@@ -106,8 +106,6 @@ public class GameEngine {
      */
     private static int movePawnExplorer(Pawn pawnToMove, EnvironmentVariables env) {
 
-        System.out.println("### ENTREE DANS \"movePawnExplorer()\" ###");
-
         Position firstClick = env.getGameVariables().getGameBoard().getFirstClickOnBoard();
         Position secondClick = env.getGameVariables().getGameBoard().getSecondClickOnBoard();
 
