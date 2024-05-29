@@ -96,6 +96,9 @@ public class GameEngine {
             if(movePawnExplorer(concernedPawn, env) == 1){
                 firstClick.setX(0);
                 firstClick.setY(0);
+
+                // Update Env Variables
+			    env.getGameVariables().setCurrentGameStatus(GameStatus.SELECT_PLAYER_TO_MOVE);
             };
 
             System.out.println("### RES 3 ###");
@@ -113,9 +116,16 @@ public class GameEngine {
      */
     private static int movePawnExplorer(Pawn pawn, EnvironmentVariables env) {
 
+        System.out.println("### ENTREE DANS \"movePawnExplorer()\" ###");
+
         Position firstClick = env.getGameVariables().getGameBoard().getFirstClickOnBoard();
         Position secondClick = env.getGameVariables().getGameBoard().getSecondClickOnBoard();
-        BoardSlot boardSlot = pawn.getCurrentBoardSlot();
+        // BoardSlot boardSlot = pawn.getCurrentBoardSlot();
+
+        System.out.println("### RES 4 ###");
+        System.out.println("firstClick.getX() = " + firstClick.getX() + " ; firstClick.getY() = " + firstClick.getY() + " ; secondClick.getX() = " + secondClick.getX() + " ; secondClick.getY() = " + secondClick.getY());
+        System.out.println("secondClick.getX() = " + secondClick.getX() + " ; secondClick.getY() = " + secondClick.getY());
+
 
         //Si le premier et le second clicks ont les même ordonnées
         if(firstClick.getY() == secondClick.getY()){
@@ -128,15 +138,15 @@ public class GameEngine {
 
                 JOptionPane.showMessageDialog(null, "Tu as clicker sur mon voisin de Gauche");
 
-                env.getGameVariables().getGameBoard().getBoardSlots().get( boardSlot.getPosition().getX() ).stream().forEach(bs -> {
+                // env.getGameVariables().getGameBoard().getBoardSlots().get( boardSlot.getPosition().getX() ).stream().forEach(bs -> {
                     
-                    if(boardSlot.getPosition().getX()-1 == bs.getPosition().getX()) {
+                //     if(boardSlot.getPosition().getX()-1 == bs.getPosition().getX()) {
 
-                        pawn.setCurrentBoardSlot(bs);
-                        boardSlot.removePawn(pawn);
-                    }
+                //         pawn.setCurrentBoardSlot(bs);
+                //         boardSlot.removePawn(pawn);
+                //     }
 
-                });
+                // });
 
                 return 1;
 
@@ -150,7 +160,7 @@ public class GameEngine {
             }
         
         // Bottom-Left Neighbor
-        } else if(firstClick.getX()-26 == secondClick.getX() && firstClick.getY()+45 == secondClick.getY()){
+        } else if(firstClick.getX()-27 == secondClick.getX() && firstClick.getY()+45 == secondClick.getY()){
 
             System.out.println("BOT LEFT NEIGBOR");
 
@@ -158,7 +168,7 @@ public class GameEngine {
             return 1;
 
         // Top-Left Neighbor
-        } else if(firstClick.getX()-26 == secondClick.getX() && firstClick.getY()-45 == secondClick.getY()){
+        } else if(firstClick.getX()-27 == secondClick.getX() && firstClick.getY()-45 == secondClick.getY()){
 
             System.out.println("TOP LEFT NEIGBOR");
 
@@ -166,7 +176,7 @@ public class GameEngine {
             return 1;
 
         // Top-Right Neighbor
-        } else if(firstClick.getX()+27 == secondClick.getX() && firstClick.getY()-45 == secondClick.getY()){
+        } else if(firstClick.getX()+26 == secondClick.getX() && firstClick.getY()-45 == secondClick.getY()){
 
             System.out.println("TOP RIGHT NEIGBOR");
 
@@ -174,7 +184,7 @@ public class GameEngine {
             return 1;
 
         // Bottom-Right Neighbor
-        } else if(firstClick.getX()+27 == secondClick.getX() && firstClick.getY()+45 == secondClick.getY()){
+        } else if(firstClick.getX()+26 == secondClick.getX() && firstClick.getY()+45 == secondClick.getY()){
 
             System.out.println("BOTTOM RIGHT NEIGBOR");
 

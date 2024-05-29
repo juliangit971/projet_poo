@@ -321,6 +321,10 @@ public class GameWindow {
 				break;
 
 			case MOVE_SELECTED_PLAYER:
+
+				// Put a "HAND_CURSOR" on the selected Pawn so we know which one we selected
+				selectedPawn.getCurrentBoardSlot().getHexagonButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				
 				
 				// Check every button
 				Integer buttonToBeChecked = 0;

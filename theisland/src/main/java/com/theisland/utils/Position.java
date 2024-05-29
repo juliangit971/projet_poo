@@ -2,8 +2,8 @@ package com.theisland.utils;
 
 public class Position {
     
-    private Integer x;
-    private Integer y;
+    private int x;
+    private int y;
 
 
 
@@ -14,8 +14,8 @@ public class Position {
      * {@code x = null ; y = null} 
      */
     public Position(){
-        this.x = null;
-        this.y = null;
+        this.x = 0;
+        this.y = 0;
     }
 
     /**
@@ -23,7 +23,7 @@ public class Position {
      * @param x position
      * @param y position
      */
-    public Position(Integer x, Integer y){
+    public Position(int x, int y){
         this.x = x;
         this.y = y;
     }
@@ -32,17 +32,17 @@ public class Position {
     // Getters & Setters
 
 
-    public Integer getX() {
+    public int getX() {
         return x;
     }
-    public void setX(Integer x) {
+    public void setX(int x) {
         this.x = x;
     }
 
-    public Integer getY() {
+    public int getY() {
         return y;
     }
-    public void setY(Integer y) {
+    public void setY(int y) {
         this.y = y;
     }
 }
